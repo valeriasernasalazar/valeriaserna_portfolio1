@@ -6,10 +6,10 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: 'index.html', // This enables SPA mode for dynamic routes
+      fallback: '404.html', 
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/valeriasernasalazar/valeriaserna_portfolio1' : '',
+      base: process.argv.includes('dev') ? '' : '/valeriaserna_portfolio1'
     },
   },
 };
