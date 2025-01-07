@@ -9,7 +9,7 @@ const config = {
       fallback: 'index.html', // This enables SPA mode for dynamic routes
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/your-repository-name' : '',
+      base: process.env.NODE_ENV === 'production' ? '/valeriasernasalazar/valeriaserna_portfolio1' : '',
     },
   },
 };
