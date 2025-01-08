@@ -4,7 +4,8 @@ const config = {
   kit: {
     adapter: adapter(),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/valeriaserna_portfolio1' : '',
+      // Set the base path for GitHub Pages
+      base: process.env.NODE_ENV === 'production' ? '/valeriaserna_portfolio1' : '', // base path for GitHub Pages
     },
   },
 };
