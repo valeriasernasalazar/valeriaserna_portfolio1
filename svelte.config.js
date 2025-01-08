@@ -7,9 +7,9 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/valeriaserna_portfolio1' : '', // Adjust base path for production
-		}
-	}
+			base: process.env.NODE_ENV === 'production' ? '/valeriaserna_portfolio1' : '',
+		  }
+	  }
 };
 
 export default config;
