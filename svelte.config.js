@@ -1,17 +1,14 @@
 import adapter from '@sveltejs/adapter-static';
+import { sveltePreprocess } from 'svelte-preprocess'; // Corrected named import
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
-  kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: '404.html', 
-    }),
-    paths: {
-      base: process.argv.includes('dev') ? '' : '/valeriaserna_portfolio1'
+    preprocess: sveltePreprocess(), // Use svelte-preprocess as a named import
+    kit: {
+        adapter: adapter(),
+        paths: {
+            base: process.env.NODE_ENV === 'production' ? '/valeriaserna_portfolio1' : '',
+        },
     },
-  },
 };
 
 export default config;

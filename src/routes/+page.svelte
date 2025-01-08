@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { base } from '$app/paths'; 
 
   const navLinks = [
     { id: "home", label: "Home" },
@@ -198,23 +199,6 @@ section {
   transform: scale(1.1);
 }
 
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.social-icons a {
-  color: #ffffff;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #C05746;
-}
-
 /* Section Styling */
 section h2 {
   font-size: 2.5rem;
@@ -314,7 +298,7 @@ button:hover {
 <nav>
   <div class="profile-container">
     <div class="profile">
-      <img src="/profilepic2.png" alt="" />
+      <img src="{base}/profilepic2.png" alt="" />
       <div class="eye" id="leftEye">
         <div class="eye-ball" id="leftEyeBall"></div>
       </div>
