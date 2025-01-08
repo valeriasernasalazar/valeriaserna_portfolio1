@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { base } from '$app/paths'; 
+  import { base } from '$app/paths'; // Import the base path
 
   const navLinks = [
     { id: "home", label: "Home" },
@@ -25,37 +25,31 @@
   }
 
   onMount(() => {
-    // Track mouse movement relative to the viewport center
     document.addEventListener("mousemove", (event) => {
       const leftEyeBall = document.getElementById("leftEyeBall");
       const rightEyeBall = document.getElementById("rightEyeBall");
 
-      const viewportCenterX = window.innerWidth / 2; // Virtual center (middle of the screen)
+      const viewportCenterX = window.innerWidth / 2;
       const viewportCenterY = window.innerHeight / 2;
-
-      const eyeRadius = 10; // Maximum distance the pupil can move (radius of the eye)
+      const eyeRadius = 10;
 
       [leftEyeBall, rightEyeBall].forEach((eyeBall) => {
         if (eyeBall) {
-          // Calculate angle and movement relative to virtual center
           const angle = Math.atan2(event.clientY - viewportCenterY, event.clientX - viewportCenterX);
-          let x = Math.cos(angle) * eyeRadius; // Desired movement
+          let x = Math.cos(angle) * eyeRadius;
           let y = Math.sin(angle) * eyeRadius;
 
-          // Clamp the pupil's position to stay within the eye's boundary
           const distance = Math.sqrt(x ** 2 + y ** 2);
           if (distance > eyeRadius) {
-            x = (x / distance) * eyeRadius; // Scale to fit within boundary
+            x = (x / distance) * eyeRadius;
             y = (y / distance) * eyeRadius;
           }
 
-          // Apply the movement
           eyeBall.style.transform = `translate(${x}px, ${y}px)`;
         }
       });
     });
 
-    // Reset position when mouse leaves the document
     document.addEventListener("mouseout", () => {
       const leftEyeBall = document.getElementById("leftEyeBall");
       const rightEyeBall = document.getElementById("rightEyeBall");
@@ -78,8 +72,8 @@
   background: rgba(27, 38, 59, 0.95);
   color: #EAEAEA;
   scroll-behavior: smooth;
-  height: 100%; /* Ensure full height */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  height: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -88,24 +82,28 @@
   scroll-behavior: smooth;
 }
 
-/* Container to ensure scrolling */
 .container {
-  height: 100vh; /* Full viewport height */
-  overflow-y: scroll; /* Enable scrolling */
-  scroll-snap-type: y proximity; /* Use proximity for less intense snapping */
-  scroll-padding-top: 100px; /* Optional: offset snapping to avoid overlap with sticky nav */
-  
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 100px;
 }
 
 .container section {
-  scroll-snap-align: start; /* Snap to the start of each section */
-  min-height: 100vh; /* Ensure sections take up the full viewport */
+  scroll-snap-align: start;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   background: #1b263b;
   color: #eaeaea;
+}
+
+
+.profile img {
+  width: 100%;
+  border-radius: 50%;
 }
 
 .container section h2 {
@@ -298,6 +296,7 @@ button:hover {
 <nav>
   <div class="profile-container">
     <div class="profile">
+      <!-- Use {base} to add the correct base path to the image -->
       <img src="{base}/profilepic2.png" alt="" />
       <div class="eye" id="leftEye">
         <div class="eye-ball" id="leftEyeBall"></div>
