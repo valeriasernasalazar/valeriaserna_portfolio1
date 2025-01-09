@@ -329,13 +329,13 @@ button {
 button:hover {
   background: #AD6A6C;
   transform: scale(1.1);
-} /*
+} 
 
 .profile-container {
   display: flex;
   align-items: center; /* Vertically aligns items */
   gap: 1rem; /* Space between image and text */
-}
+} 
 
 .profile {
   position: relative;
