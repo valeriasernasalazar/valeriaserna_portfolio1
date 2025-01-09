@@ -329,7 +329,7 @@ button {
 button:hover {
   background: #AD6A6C;
   transform: scale(1.1);
-}
+} /*
 
 .profile-container {
   display: flex;
