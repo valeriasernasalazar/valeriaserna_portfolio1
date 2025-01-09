@@ -1,10 +1,11 @@
 <script>
   import { onMount } from "svelte";
   import { base } from '$app/paths'; // Import the base path
+  import { goto } from '$app/navigation';
 
   const navLinks = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About Me" },
+    { id: "home", label: "Home", href: "/" },
+    { id: "about", label: "About Me", href: "/about" },
     { id: "projects", label: "Projects" },
     { id: "books", label: "Books" },
     { id: "fun", label: "Fun Stuff" },
@@ -133,6 +134,8 @@ onMount(() => {
   animate();
 });
 
+
+
 </script>
 <style>
 /* Global Styles */
@@ -143,18 +146,18 @@ onMount(() => {
   }
 }
 
-:global(html){
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background: rgba(27, 38, 59, 0.95);
-  color: #EAEAEA;
-  scroll-behavior: smooth;
-  height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-}
+:global(html) {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: rgba(27, 38, 59, 0.95);
+    color: #EAEAEA;
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 
 :global(html) {
   scroll-behavior: smooth;
@@ -164,7 +167,7 @@ onMount(() => {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y proximity;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 100px; /* Account for the navbar height */
 }
 
 .container section {
@@ -220,7 +223,7 @@ nav ul li a {
   color: #ADB6C4;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
   white-space: nowrap; /* Ensure no wrapping for individual links */
 }
@@ -248,22 +251,29 @@ section {
 
 /* Home Section */
 #home {
-  color: #EAEAEA;
+    color: #EAEAEA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background: rgba(27, 38, 59, 0.95);
+    padding-top: 100px; /* Ensures content starts below the navbar */
 }
 
 #home h1 {
   margin-top: -15.5rem;
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   color: #C05746;
 }
 
 #home p {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #ffffff;
   margin-bottom: 5rem;
   line-height: 1.5;
-  margin-top: -1rem;
+  margin-top: -1.0rem;
 }
 
 .cta-buttons a {
@@ -273,7 +283,7 @@ section {
   padding: 1rem 2rem;
   border-radius: 30px;
   margin: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
   transition: all 0.3s ease;
 }
@@ -361,19 +371,13 @@ button:hover {
 }
 
 #leftEye {
-  top: -6.3vh; /* Adjust based on your image */
-  left: 3vh;
+  top: -8vh; /* Adjust based on your image */
+  left: 3.3vh;
 }
 
 #rightEye {
-  top: -7.9vh; /* Adjust based on your image */
-  right: -4.5vh;
-}
-
-.profile-name {
-  font-size: 1.5rem; /* Adjust font size */
-  color: #C05746; /* Match your theme */
-  font-weight: bold;
+  top: -10vh; /* Adjust based on your image */
+  right: -5.4vh;
 }
 
 #backgroundCanvas {
@@ -383,6 +387,56 @@ button:hover {
   width: 100%;
   height: 100%;
   z-index: -1; /* Place it behind all other elements */
+}
+
+#about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(27, 38, 59, 0.95);
+    color: #EAEAEA;
+    padding: 50px 100px;
+}
+
+#about h1 {
+    font-size: 3rem;
+    color: #C05746;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 0vh;
+    text-align: left;
+}
+
+#about p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #EAEAEA;
+    text-align: justify;
+    margin-right: 60px;
+}
+
+#about .cta-buttons a {
+    background: #C05746;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+#about .cta-buttons a:hover {
+    background: #AD6A6C;
+    transform: scale(1.1);
+}
+
+#about img {
+    width: 20%;
+    height: 20%;
+    object-fit: cover;
 }
 
 
@@ -400,14 +454,18 @@ button:hover {
         <div class="eye-ball" id="rightEyeBall"></div>
       </div>
     </div>
-    <h1 class="profile-name">Valeria Serna</h1>
   </div>
-  <ul>
-    {#each navLinks as { id, label }}
-      <li><a href={`#${id}`}>{label}</a></li>
-    {/each}
-  </ul>
-</nav>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About Me</a></li>  <!-- Link to the About Me page -->
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#projects">Books</a></li>
+      <li><a href="#projects">Fun Stuff</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  </nav>
 <canvas id="backgroundCanvas"></canvas>
 
 <div id="particles-js"></div>
@@ -424,12 +482,27 @@ button:hover {
 
 
   <section id="about">
-    <h2>About Me</h2>
-    <div class="profile-container">
-      <p>Hi, I'm Valeria, a data scientist with a curious mind and a love for coffee and books!</p>
+    <!-- Text on the Left -->
+    <div class="text">
+      <h1>About Me</h1>
+      <p>
+        Hi, I’m Valeria Serna, a data scientist with a passion for solving problems through data. I’ve always enjoyed puzzles and finding patterns, and that curiosity naturally led me to statistics, programming, and data science. Over the past few years, I’ve dived into machine learning, data visualization, and AI, but at the core, I’m really just trying to understand how things work and how data can help improve the world.
+      </p>
+      <p>
+        When I’m not working on data, I’m usually reading—whether it’s something philosophical like *Meditations* by Marcus Aurelius or just a book that gets me thinking about life. Coffee is a must for me during those moments of deep thinking.
+      </p>
+      <p>
+        I love the process of digging into messy datasets, experimenting with new algorithms, and uncovering insights that can make a difference. For me, data science isn’t just about the technical skills; it’s about finding answers to questions that can actually have an impact. And even when things get tough, I believe the best part of data science is pushing through the challenges and seeing the results.
+      </p>
+      <div class="cta-buttons">
+        <a href="/about">To discover more about me, click here</a>
+      </div>
     </div>
+    
+    <!-- Profile Image on the Right -->
+    <img src="{base}/foto2.png" alt="Valeria Serna" />
   </section>
-  
+    
   
   <section id="projects">
     <h2>Projects</h2>
