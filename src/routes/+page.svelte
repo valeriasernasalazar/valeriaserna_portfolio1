@@ -25,46 +25,124 @@
   }
 
   onMount(() => {
-    document.addEventListener("mousemove", (event) => {
-      const leftEyeBall = document.getElementById("leftEyeBall");
-      const rightEyeBall = document.getElementById("rightEyeBall");
+  document.addEventListener("mousemove", (event) => {
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
+    const leftEyeBall = document.getElementById("leftEyeBall");
+    const rightEyeBall = document.getElementById("rightEyeBall");
 
-      const viewportCenterX = window.innerWidth / 2;
-      const viewportCenterY = window.innerHeight / 2;
-      const eyeRadius = 10;
+    const eyes = [
+      { eye: leftEye, ball: leftEyeBall },
+      { eye: rightEye, ball: rightEyeBall },
+    ];
 
-      [leftEyeBall, rightEyeBall].forEach((eyeBall) => {
-        if (eyeBall) {
-          const angle = Math.atan2(event.clientY - viewportCenterY, event.clientX - viewportCenterX);
-          let x = Math.cos(angle) * eyeRadius;
-          let y = Math.sin(angle) * eyeRadius;
+    eyes.forEach(({ eye, ball }) => {
+      if (eye && ball) {
+        const eyeRect = eye.getBoundingClientRect();
+        const centerX = eyeRect.left + eyeRect.width / 2;
+        const centerY = eyeRect.top + eyeRect.height / 2;
 
-          const distance = Math.sqrt(x ** 2 + y ** 2);
-          if (distance > eyeRadius) {
-            x = (x / distance) * eyeRadius;
-            y = (y / distance) * eyeRadius;
-          }
+        const dx = event.clientX - centerX;
+        const dy = event.clientY - centerY;
 
-          eyeBall.style.transform = `translate(${x}px, ${y}px)`;
-        }
-      });
-    });
+        const angle = Math.atan2(dy, dx);
+        const distance = Math.min(Math.sqrt(dx * dx + dy * dy), eyeRect.width / 4); // Restrict movement to half the eye radius
 
-    document.addEventListener("mouseout", () => {
-      const leftEyeBall = document.getElementById("leftEyeBall");
-      const rightEyeBall = document.getElementById("rightEyeBall");
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
 
-      [leftEyeBall, rightEyeBall].forEach((eyeBall) => {
-        if (eyeBall) {
-          eyeBall.style.transform = "translate(-50%, -50%)";
-        }
-      });
+        ball.style.transform = `translate(${x}px, ${y}px)`;
+      }
     });
   });
-</script>
 
+  document.addEventListener("mouseout", () => {
+    const leftEyeBall = document.getElementById("leftEyeBall");
+    const rightEyeBall = document.getElementById("rightEyeBall");
+
+    [leftEyeBall, rightEyeBall].forEach((eyeBall) => {
+      if (eyeBall) {
+        eyeBall.style.transform = "translate(0, 0)";
+      }
+    });
+  });
+});
+
+onMount(() => {
+  // Explicitly cast to HTMLCanvasElement
+  const canvas = /** @type {HTMLCanvasElement | null} */ (document.getElementById("backgroundCanvas"));
+
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  // Set canvas size to match the window
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  let lines = [];
+  const lineCount = 5;
+  const lineSpacing = 150; // Spacing between lines
+  const speed = 0.5;
+
+  // Initialize lines
+  for (let i = 0; i < lineCount; i++) {
+    const offsetY = i * lineSpacing;
+    const points = Array(30)
+      .fill(0)
+      .map((_, i) => ({
+        x: (i / 30) * canvas.width,
+        y: Math.random() * 50 + offsetY,
+      }));
+    lines.push({ points, offsetY });
+  }
+
+  function animate() {
+    if (!ctx) return; // Ensure ctx is defined
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw each line
+    lines.forEach((line) => {
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; // Faint white lines
+
+      line.points.forEach((point, i) => {
+        const waveOffset = Math.sin((point.x + performance.now() * speed) * 0.005) * 20;
+        const y = point.y + waveOffset;
+
+        if (i === 0) {
+          ctx.moveTo(point.x, y);
+        } else {
+          ctx.lineTo(point.x, y);
+        }
+      });
+
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
+</script>
 <style>
 /* Global Styles */
+
+@media (max-width: 768px) {
+  nav ul li a {
+    font-size: 1rem; /* Reduce font size for smaller screens */
+  }
+}
+
 :global(html){
   margin: 0;
   padding: 0;
@@ -133,14 +211,22 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
 nav ul li a {
-  color: #ADB6C4; /* Default link color */
+  color: #ADB6C4;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.2rem;
   transition: color 0.3s ease;
+  white-space: nowrap; /* Ensure no wrapping for individual links */
+}
+
+nav ul {
+  justify-content: space-between; /* Distribute links evenly while maintaining spacing */
 }
 
 nav ul li a:hover {
@@ -253,41 +339,50 @@ button:hover {
 }
 
 .eye {
-  position: absolute;
-  width: 16px; /* Adjust size for the eyes */
+  position: relative;
+  width: 16px; /* Relative to the eye container */
   height: 16px;
   background: white;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
 }
 
 .eye-ball {
-  position: absolute;
-  width: 8px; /* Adjust size for the pupil */
-  height: 8px;
+  position: relative;
+  width: 50%; /* Relative to the white part */
+  height: 50%;
   background: black;
   border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.1s; /* Smooth movement */
+  transition: 0.1s;
 }
 
 #leftEye {
-  top: 22px; /* Adjust based on your image */
-  left: 28px;
+  top: -6.3vh; /* Adjust based on your image */
+  left: 3vh;
 }
 
 #rightEye {
-  top: 22px; /* Adjust based on your image */
-  right: 20px;
+  top: -7.9vh; /* Adjust based on your image */
+  right: -4.5vh;
 }
 
 .profile-name {
   font-size: 1.5rem; /* Adjust font size */
   color: #C05746; /* Match your theme */
   font-weight: bold;
+}
+
+#backgroundCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place it behind all other elements */
 }
 
 
@@ -313,6 +408,7 @@ button:hover {
     {/each}
   </ul>
 </nav>
+<canvas id="backgroundCanvas"></canvas>
 
 <div id="particles-js"></div>
 
@@ -325,6 +421,7 @@ button:hover {
       <a href="#contact">Contact Me</a>
     </div>
   </section>
+
 
   <section id="about">
     <h2>About Me</h2>
