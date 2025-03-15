@@ -11,7 +11,7 @@
         description: "Built an AI capable of analyzing and counting traffic using YOLO at Tec de Monterrey in Distrito Tec. Analyzed 20+ hours of footage for a major research project.",
         tags: ["Computer Vision", "YOLO", "AI"],
         type: "AI",
-        imageUrl: "/project-icons/traffic-vision.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/traffic-vision.jpg", // Placeholder - replace with actual image path
         isNew: true,
         detailedDescription: `
           <h4>Project Overview</h4>
@@ -45,7 +45,7 @@
         description: "Implemented a Python bot using Selenium to collect client posts on social platforms, reducing weekly analysis time by 40%. Automated Google Sheets reports using Google Cloud Console.",
         tags: ["Selenium", "Python", "Google Cloud"],
         type: "Automation",
-        imageUrl: "/project-icons/web-scraping.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/web-scraping.jpg", // Placeholder - replace with actual image path
         isNew: true,
         detailedDescription: `
           <h4>Project Overview</h4>
@@ -79,7 +79,7 @@
         description: "Developed Tableau dashboards in collaboration with security and operations teams, improving efficiency for over 100 employees and facilitating real-time decision-making.",
         tags: ["Tableau", "Dashboard Design", "UX"],
         type: "Data Visualization",
-        imageUrl: "/project-icons/dashboard.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/dashboard.jpg", // Placeholder - replace with actual image path
         isNew: false,
         detailedDescription: `
           <h4>Project Overview</h4>
@@ -113,7 +113,7 @@
         description: "Improved customer experience by analyzing passenger feedback through sentiment analysis, identifying key issues with payment methods, prices, and seating.",
         tags: ["NLP", "Logistic Regression", "Word Clouds"],
         type: "Machine Learning",
-        imageUrl: "/project-icons/sentiment-analysis.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/sentiment-analysis.jpg", // Placeholder - replace with actual image path
         isNew: false,
         detailedDescription: `
           <h4>Project Overview</h4>
@@ -147,7 +147,7 @@
         description: "Developed search algorithms to help a robotic explorer navigate Mars terrain, testing A*, Greedy Search, Iterative Deepening, and Breadth-First approaches.",
         tags: ["Search Algorithms", "AI", "Path Finding"],
         type: "AI",
-        imageUrl: "/project-icons/mars-rover.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/mars-rover.jpg", // Placeholder - replace with actual image path
         isNew: false,
         detailedDescription: `
           <h4>Project Overview</h4>
@@ -181,7 +181,7 @@
         description: "Developed interactive visualizations for an internal campus buying and selling platform, increasing sales by 18% after adjusting product display and promotions.",
         tags: ["Tableau", "Python", "Data Viz"],
         type: "Data Visualization",
-        imageUrl: "/project-icons/data-viz.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/data-viz.jpg", // Placeholder - replace with actual image path
         isNew: false,
         detailedDescription: `
           <h4>Project Overview</h4>
