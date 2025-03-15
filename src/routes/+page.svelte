@@ -460,7 +460,7 @@ button:hover {
       <li><a href="/#projects">Projects</a></li>
       <li><a href="/#books">Books</a></li>
       <li><a href="/#projects">Fun Stuff</a></li>
-      <li><a href="/#contact">Contact</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
   </nav>
@@ -507,8 +507,6 @@ button:hover {
   </section>
 
   <section id="books">
-    <h2>Books</h2>
-    <p>A collection of books I’ve read and recommend—data science must-reads and quirky favorites!</p>
   <Books />
   </section>
 

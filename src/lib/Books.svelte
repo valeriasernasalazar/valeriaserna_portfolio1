@@ -549,6 +549,7 @@
       background: rgba(27, 38, 59, 0.95);
       padding: 4rem 2rem;
       min-height: 100vh;
+      margin-top: 100px;
     }
     
     /* View Toggle */
