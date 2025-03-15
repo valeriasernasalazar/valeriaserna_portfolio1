@@ -9,8 +9,8 @@
   const navLinks = [
     { id: "home", label: "Home", href: "/" },
     { id: "about", label: "About Me", href: "/about" },
-    { id: "projects", label: "Projects", href: "#projects" },  
-    { id: "books", label: "Books", href: "#books"},
+    { id: "projects", label: "Projects", href: "/#projects" },  
+    { id: "books", label: "Books", href: "/#books"},
     { id: "fun", label: "Fun Stuff" },
     { id: "contact", label: "Contact" },
   ];
@@ -457,10 +457,10 @@ button:hover {
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="#about">About Me</a></li>  <!-- Link to the About Me page -->
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#books">Books</a></li>
-      <li><a href="#projects">Fun Stuff</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#books">Books</a></li>
+      <li><a href="/#projects">Fun Stuff</a></li>
+      <li><a href="/#contact">Contact</a></li>
     </ul>
   </nav>
   </nav>
@@ -473,8 +473,8 @@ button:hover {
     <h1>Hello, I'm Valeria Serna</h1>
     <p>Expert at turning coffee ☕ and code 💻 into insights that matter.</p>
     <div class="cta-buttons">
-      <a href="#projects">View My Projects</a>
-      <a href="#contact">Contact Me</a>
+      <a href="/#projects">View My Projects</a>
+      <a href="/#contact">Contact Me</a>
     </div>
   </section>
 
