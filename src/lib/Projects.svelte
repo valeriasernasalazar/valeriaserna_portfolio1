@@ -307,7 +307,7 @@
                   src={project.imageUrl} 
                   alt={`${project.title} icon`} 
                   class="project-image"
-                  on:error={(e) => e.target.src = '/project-icons/placeholder.png'}
+                  on:error={(e) => e.target.src = '/project-icons/place-holder.jpg'}
                 />
               </div>
             </div>
