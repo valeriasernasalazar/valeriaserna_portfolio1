@@ -2,12 +2,15 @@
   import { onMount } from "svelte";
   import { base } from '$app/paths'; // Import the base path
   import { goto } from '$app/navigation';
+  import Projects from '$lib/Projects.svelte';
+  import Books from '$lib/Books.svelte';
+  
 
   const navLinks = [
     { id: "home", label: "Home", href: "/" },
     { id: "about", label: "About Me", href: "/about" },
-    { id: "projects", label: "Projects" },
-    { id: "books", label: "Books" },
+    { id: "projects", label: "Projects", href: "#projects" },  
+    { id: "books", label: "Books", href: "#books"},
     { id: "fun", label: "Fun Stuff" },
     { id: "contact", label: "Contact" },
   ];
@@ -203,11 +206,6 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-}
-
-nav h1 {
-  font-size: 1.5rem;
-  color: #C05746; /* Color for the name */
 }
 
 nav ul {
@@ -458,9 +456,9 @@ button:hover {
   <nav>
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/about">About Me</a></li>  <!-- Link to the About Me page -->
+      <li><a href="#about">About Me</a></li>  <!-- Link to the About Me page -->
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#projects">Books</a></li>
+      <li><a href="#books">Books</a></li>
       <li><a href="#projects">Fun Stuff</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -505,13 +503,13 @@ button:hover {
     
   
   <section id="projects">
-    <h2>Projects</h2>
-    <p>Here are some of the projects I’ve worked on. Click to learn more!</p>
+    <Projects />
   </section>
 
   <section id="books">
     <h2>Books</h2>
     <p>A collection of books I’ve read and recommend—data science must-reads and quirky favorites!</p>
+  <Books />
   </section>
 
   <section id="fun">
