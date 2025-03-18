@@ -277,8 +277,7 @@
   </script>
   
   <section id="projects">
-    <h2>Projects</h2>
-    <p>A collection of my data science adventures and problem-solving journeys</p>
+    <p class="p1">A collection of my data science adventures and problem-solving journeys</p>
     
     <!-- Filter controls -->
     <div class="filter-controls">
@@ -1082,5 +1081,9 @@
     .tags span:hover {
       transform: none;
     }
+  }
+
+  .p1{
+    margin-top:-6vh;
   }
   </style>

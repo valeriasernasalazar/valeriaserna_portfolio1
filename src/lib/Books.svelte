@@ -332,8 +332,7 @@
   </script>
   
   <section id="books">
-    <h2>My Bookshelf</h2>
-    <p>Books that have influenced my thinking and expanded my horizons</p>
+    <p class="p1">Books that have influenced my thinking and expanded my horizons</p>
     
     <!-- View toggle -->
     <div class="view-toggle">
@@ -657,6 +656,10 @@
       animation: fadeIn 0.5s forwards;
       animation-delay: var(--delay);
       opacity: 0;
+    }
+
+    .p1{
+        margin-top:-20vh;
     }
     
     @keyframes fadeIn {

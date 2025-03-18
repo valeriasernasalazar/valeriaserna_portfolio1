@@ -4,6 +4,7 @@
   import { goto } from '$app/navigation';
   import Projects from '$lib/Projects.svelte';
   import Books from '$lib/Books.svelte';
+  import FunStuff from "$lib/FunStuff.svelte";
   
 
   const navLinks = [
@@ -70,52 +71,56 @@
     window.addEventListener('scroll', handleScroll);
     requestAnimationFrame(updateNavbar);
     
+    // Add event listener for eye movement
+    const moveEyes = (e) => {
+      const leftEye = document.getElementById("leftEye");
+      const rightEye = document.getElementById("rightEye");
+      const leftEyeBall = document.getElementById("leftEyeBall");
+      const rightEyeBall = document.getElementById("rightEyeBall");
+      
+      if (leftEye && rightEye && leftEyeBall && rightEyeBall) {
+        const eyes = [
+          { eye: leftEye, ball: leftEyeBall },
+          { eye: rightEye, ball: rightEyeBall }
+        ];
+        
+        eyes.forEach(({ eye, ball }) => {
+          const rect = eye.getBoundingClientRect();
+          const eyeX = rect.left + rect.width / 2;
+          const eyeY = rect.top + rect.height / 2;
+          const dx = e.clientX - eyeX;
+          const dy = e.clientY - eyeY;
+          const angle = Math.atan2(dy, dx);
+          const maxDistance = rect.width / 4;
+          const distance = Math.min(Math.sqrt(dx * dx + dy * dy), maxDistance);
+          const x = Math.cos(angle) * distance;
+          const y = Math.sin(angle) * distance;
+          
+          ball.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      }
+    };
+    
+    // Reset eyes position
+    const resetEyes = () => {
+      const leftEyeBall = document.getElementById("leftEyeBall");
+      const rightEyeBall = document.getElementById("rightEyeBall");
+      
+      if (leftEyeBall && rightEyeBall) {
+        leftEyeBall.style.transform = "translate(0, 0)";
+        rightEyeBall.style.transform = "translate(0, 0)";
+      }
+    };
+    
+    document.addEventListener("mousemove", moveEyes);
+    document.addEventListener("mouseout", resetEyes);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener("mousemove", moveEyes);
+      document.removeEventListener("mouseout", resetEyes);
     };
-
-  document.addEventListener("mousemove", (event) => {
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
-    const leftEyeBall = document.getElementById("leftEyeBall");
-    const rightEyeBall = document.getElementById("rightEyeBall");
-
-    const eyes = [
-      { eye: leftEye, ball: leftEyeBall },
-      { eye: rightEye, ball: rightEyeBall },
-    ];
-
-    eyes.forEach(({ eye, ball }) => {
-      if (eye && ball) {
-        const eyeRect = eye.getBoundingClientRect();
-        const centerX = eyeRect.left + eyeRect.width / 2;
-        const centerY = eyeRect.top + eyeRect.height / 2;
-
-        const dx = event.clientX - centerX;
-        const dy = event.clientY - centerY;
-
-        const angle = Math.atan2(dy, dx);
-        const distance = Math.min(Math.sqrt(dx * dx + dy * dy), eyeRect.width / 4); // Restrict movement to half the eye radius
-
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-
-        ball.style.transform = `translate(${x}px, ${y}px)`;
-      }
-    });
   });
-
-  document.addEventListener("mouseout", () => {
-    const leftEyeBall = document.getElementById("leftEyeBall");
-    const rightEyeBall = document.getElementById("rightEyeBall");
-
-    [leftEyeBall, rightEyeBall].forEach((eyeBall) => {
-      if (eyeBall) {
-        eyeBall.style.transform = "translate(0, 0)";
-      }
-    });
-  });
-});
 </script>
 <style>
 /* Global Styles */
@@ -316,8 +321,9 @@ nav > ul li a:hover {
   border-radius: 50%;
 }
 
+/* Eye styling - FIXED POSITIONING */
 .eye {
-  position: relative;
+  position: absolute;
   width: 12px;
   height: 12px;
   background: white;
@@ -327,6 +333,7 @@ nav > ul li a:hover {
   align-items: center;
   overflow: hidden;
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 @media (min-width: 768px) {
@@ -342,28 +349,33 @@ nav > ul li a:hover {
   height: 50%;
   background: black;
   border-radius: 50%;
-  transition: 0.1s;
+  transition: transform 0.1s;
 }
 
+/* Fixed positioning for eyes */
 #leftEye {
-  top: -6vh;
-  left: 2.5vh;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  transform: translate(-50%, -50%);
 }
 
 #rightEye {
-  top: -7.5vh;
-  right: -4vh;
+  position: absolute;
+  top: 40%;
+  right: 30%;
+  transform: translate(50%, -50%);
 }
 
 @media (min-width: 768px) {
   #leftEye {
-    top: -8vh;
-    left: 3.3vh;
+    top: 35%;
+    left: 45%;
   }
 
   #rightEye {
-    top: -10vh;
-    right: -5.4vh;
+    top: 35%;
+    right: 35%;
   }
 }
 
@@ -664,12 +676,16 @@ button:hover {
   opacity: 1;
   visibility: visible;
 }
+.projectsf, .booksf, .funstufff{
+  margin-top: 10vh;
+}
+
 </style>
 
 <nav>
   <div class="profile-container">
     <div class="profile">
-      <img src="{base}/profilepic2.png" alt="" />
+      <img src="{base}/profilepic2.png" alt="Profile" />
       <div class="eye" id="leftEye">
         <div class="eye-ball" id="leftEyeBall"></div>
       </div>
@@ -744,19 +760,18 @@ button:hover {
   </section>
     
   <section id="projects">
+    <h2 class="projectsf">Projects</h2>
     <Projects />
   </section>
 
   <section id="books">
+    <h2 class="booksf">Books</h2>
     <Books />
   </section>
 
   <section id="fun">
-    <h2>Fun Stuff</h2>
-    <div class="fact-box">
-      <p>{randomFact}</p>
-    </div>
-    <button on:click={generateRandomFact}>Generate Fun Fact</button>
+    <h2 class="funstufff">Fun Stuff</h2>
+    <FunStuff />
   </section>
 
   <section id="contact">
