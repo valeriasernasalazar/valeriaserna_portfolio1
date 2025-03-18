@@ -469,7 +469,6 @@
     {/if}
     
     <!-- Scroll indicator -->
-    <div class="scroll-indicator" on:click={() => window.scrollTo({top: 0, behavior: 'smooth'})}>↑</div>
   </section>
   
   <style>
@@ -482,7 +481,7 @@
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
   }
@@ -496,6 +495,7 @@
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
+    position: relative;
   }
   
   .project-card:hover {
@@ -507,14 +507,28 @@
     padding: 1.5rem;
     border-bottom: 1px solid rgba(173, 106, 108, 0.2);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 768px) {
+    .project-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
   
   .project-title {
     font-size: 1.3rem;
     font-weight: 700;
     color: #C05746;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .project-title {
+      margin-bottom: 0;
+    }
   }
   
   .project-date {
@@ -646,6 +660,7 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    padding: 1rem;
   }
   
   .project-modal.active {
@@ -655,16 +670,27 @@
   
   .modal-content {
     background: #1b263b;
-    width: 80%;
+    width: 90%;
     max-width: 800px;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1.5rem;
     position: relative;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     transform: translateY(-30px);
     transition: all 0.3s ease;
+  }
+  
+  @media (min-width: 768px) {
+    .project-modal {
+      padding: 0;
+    }
+    
+    .modal-content {
+      width: 80%;
+      padding: 2rem;
+    }
   }
   
   .project-modal.active .modal-content {
@@ -681,6 +707,7 @@
     font-size: 1.5rem;
     cursor: pointer;
     transition: color 0.3s ease;
+    z-index: 2;
   }
   
   .modal-close:hover {
@@ -692,9 +719,15 @@
   }
   
   .modal-header h3 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: #C05746;
     margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .modal-header h3 {
+      font-size: 2rem;
+    }
   }
   
   .modal-body {
@@ -817,7 +850,7 @@
     justify-content: center;
     margin-bottom: 2rem;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.8rem;
   }
   
   .filter-btn {
@@ -828,6 +861,19 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .filter-btn {
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+    }
+    
+    .filter-controls {
+      gap: 1rem;
+    }
   }
   
   .filter-btn:hover,
@@ -852,8 +898,20 @@
   
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  
+  @media (min-width: 480px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   
   .skill-category {
@@ -943,21 +1001,31 @@
   /* Scroll indicator */
   .scroll-indicator {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 50px;
-    height: 50px;
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
     background: #C05746;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     z-index: 999;
+  }
+  
+  @media (min-width: 768px) {
+    .scroll-indicator {
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+    }
   }
   
   .scroll-indicator:hover {
@@ -965,19 +1033,54 @@
     background: #AD6A6C;
   }
   
-  /* Media queries for responsive design */
-  @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
+  /* Additional Media Queries for better responsive design */
+  @media (max-width: 480px) {
+    #projects {
+      padding: 3rem 1rem;
     }
     
-    .modal-content {
-      width: 95%;
-      padding: 1.5rem;
+    h2 {
+      font-size: 1.8rem;
     }
     
-    .skills-grid {
-      grid-template-columns: 1fr;
+    .project-title {
+      font-size: 1.1rem;
+    }
+    
+    .project-card p {
+      font-size: 0.9rem;
+    }
+    
+    .project-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.4rem;
+    }
+    
+    .modal-body h4 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Touch device optimizations */
+  @media (hover: none) {
+    .project-card:hover {
+      transform: none;
+    }
+    
+    .project-btn:hover {
+      transform: none;
+    }
+    
+    .project-image:hover {
+      transform: none;
+    }
+    
+    .tags span:hover {
+      transform: none;
     }
   }
   </style>
