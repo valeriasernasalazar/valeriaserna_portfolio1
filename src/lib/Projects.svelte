@@ -11,7 +11,7 @@
         description: "Built an AI capable of analyzing and counting traffic using YOLO at Tec de Monterrey in Distrito Tec. Analyzed 20+ hours of footage for a major research project.",
         tags: ["Computer Vision", "YOLO", "AI"],
         type: "AI",
-        imageUrl: "/project-icons/traffic-vision.png", // Placeholder - replace with actual image path
+        imageUrl: "/project-icons/traffic-vision.png",
         isNew: true,
         detailedDescription: `
           <h4>Project Overview</h4>

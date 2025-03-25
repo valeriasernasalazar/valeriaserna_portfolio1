@@ -741,14 +741,14 @@ button:hover {
     <!-- Text on the Left -->
     <div class="text">
       <h1>About Me</h1>
-      <p>
-        Hi, I'm Valeria Serna, a data scientist with a passion for solving problems through data. I've always enjoyed puzzles and finding patterns, and that curiosity naturally led me to statistics, programming, and data science. Over the past few years, I've dived into machine learning, data visualization, and AI, but at the core, I'm really just trying to understand how things work and how data can help improve the world.
+      <p class="p11">
+        Hi, I'm Valeria Serna. I'm a data scientist with a deep curiosity for solving problems and uncovering patterns in data. My fascination with how things work naturally led me to explore statistics, programming, and machine learning, where I’ve spent the past few years working on predictive models, data visualization, and AI. What excites me the most is the moment when raw data starts to make sense, revealing insights that can drive meaningful decisions and create real impact.
+     </p>
+      <p class="p11">
+        I really enjoy the challenge of working with complex, messy datasets and figuring out how to transform them into clear, actionable answers. For me, data science isn’t just about technical expertise—it’s about knowing how to ask the right questions and using data to uncover solutions that matter. Even when the process gets frustrating, the satisfaction of seeing the pieces come together makes it all worthwhile.
       </p>
-      <p>
-        When I'm not working on data, I'm usually reading—whether it's something philosophical like *Meditations* by Marcus Aurelius or just a book that gets me thinking about life. Coffee is a must for me during those moments of deep thinking.
-      </p>
-      <p>
-        I love the process of digging into messy datasets, experimenting with new algorithms, and uncovering insights that can make a difference. For me, data science isn't just about the technical skills; it's about finding answers to questions that can actually have an impact. And even when things get tough, I believe the best part of data science is pushing through the challenges and seeing the results.
+      <p class="p11">
+        When I’m not working with data, I’m usually lost in a book. I love reading philosophical works like Meditations by Marcus Aurelius or anything that challenges me to see the world differently and think more deeply. If you're curious, I’ve put together a section where I share my thoughts on some of my favorite books—you can check it out if you’re interested. And, of course, coffee is always nearby—it’s an essential part of my creative process and those moments of deep thinking.
       </p>
       <div class="cta-buttons">
         <a href="/#projects">Get a look at my projects!</a>
