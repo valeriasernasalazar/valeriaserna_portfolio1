@@ -5,6 +5,7 @@
   import Projects from '$lib/Projects.svelte';
   import Books from '$lib/Books.svelte';
   import FunStuff from "$lib/FunStuff.svelte";
+    import Contact from "$lib/Contact.svelte";
   
 
   const navLinks = [
@@ -497,12 +498,12 @@ section {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 100px;
+    padding: 50px 180px;
   }
 }
 
 #about h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #C05746;
     margin-bottom: 15px;
     font-weight: bold;
@@ -676,7 +677,7 @@ button:hover {
   opacity: 1;
   visibility: visible;
 }
-.projectsf, .booksf, .funstufff{
+.projectsf, .booksf, .funstufff, .contactmef{
   margin-top: 10vh;
 }
 
@@ -702,7 +703,7 @@ button:hover {
     <li><a href="/#projects">Projects</a></li>
     <li><a href="/#books">Books</a></li>
     <li><a href="/#fun">Fun Stuff</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="/#contact">Contact</a></li>
   </ul>
   
   <!-- Mobile menu button -->
@@ -720,7 +721,7 @@ button:hover {
     <li><a href="/#projects" on:click={closeMobileMenu}>Projects</a></li>
     <li><a href="/#books" on:click={closeMobileMenu}>Books</a></li>
     <li><a href="/#fun" on:click={closeMobileMenu}>Fun Stuff</a></li>
-    <li><a href="#contact" on:click={closeMobileMenu}>Contact</a></li>
+    <li><a href="/#contact" on:click={closeMobileMenu}>Contact</a></li>
   </ul>
 </div>
 
@@ -742,13 +743,13 @@ button:hover {
     <div class="text">
       <h1>About Me</h1>
       <p class="p11">
-        Hi, I'm Valeria Serna. I'm a data scientist with a deep curiosity for solving problems and uncovering patterns in data. My fascination with how things work naturally led me to explore statistics, programming, and machine learning, where I’ve spent the past few years working on predictive models, data visualization, and AI. What excites me the most is the moment when raw data starts to make sense, revealing insights that can drive meaningful decisions and create real impact.
-     </p>
+        Hey, I’m Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
+             </p>
       <p class="p11">
-        I really enjoy the challenge of working with complex, messy datasets and figuring out how to transform them into clear, actionable answers. For me, data science isn’t just about technical expertise—it’s about knowing how to ask the right questions and using data to uncover solutions that matter. Even when the process gets frustrating, the satisfaction of seeing the pieces come together makes it all worthwhile.
+        I enjoy the challenge of working with messy data and turning it into clear answers. For me, data science is about asking the right questions and uncovering solutions that matter. Even when it’s frustrating, seeing everything come together is totally worth it.
       </p>
       <p class="p11">
-        When I’m not working with data, I’m usually lost in a book. I love reading philosophical works like Meditations by Marcus Aurelius or anything that challenges me to see the world differently and think more deeply. If you're curious, I’ve put together a section where I share my thoughts on some of my favorite books—you can check it out if you’re interested. And, of course, coffee is always nearby—it’s an essential part of my creative process and those moments of deep thinking.
+        When I’m not working with data, I’m usually reading. I love philosophical books like Meditations by Marcus Aurelius or anything that makes me think differently. Oh, and coffee is always nearby—it’s key to my creative process!
       </p>
       <div class="cta-buttons">
         <a href="/#projects">Get a look at my projects!</a>
@@ -775,7 +776,7 @@ button:hover {
   </section>
 
   <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Let's connect! I'm always up for a chat about data, projects, or your favorite algorithm.</p>
+    <h2 class="contactmef">Contact Me</h2>
+    <Contact />
   </section>
 </div>

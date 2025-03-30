@@ -1,386 +1,185 @@
 <script>
-    import { onMount } from "svelte";
-    import { base } from '$app/paths';
+  import { onMount } from "svelte";
+  import { base } from '$app/paths';
 </script>
 
 <form
-  action="https://formspree.io/f/{FORM_ID}"
-  class="fs-form"
+  action="https://formspree.io/f/xaygwgdg"
+  class="contact-form"
   target="_top"
   method="POST"
 >
-  <div class="fs-field">
-    <label class="fs-label" for="name">Your Name</label>
-    <input class="fs-input" id="name" name="name" required />
+  <div class="form-header">
+    <p>Let's connect! I'm always up for a chat about data, projects, or your favorite algorithm.</p>
   </div>
-  <div class="fs-field">
-    <label class="fs-label" for="email">Email</label>
-    <input class="fs-input" id="email" name="email" required />
-    <p class="fs-description">
-      This will help me respond to your query via an email.
-    </p>
+  
+  <div class="form-fields">
+    <div class="form-field">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+    
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+      <p class="field-description">This will help me respond to your query via email.</p>
+    </div>
+    
+    <div class="form-field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+      <p class="field-description">What would you like to discuss?</p>
+    </div>
   </div>
-  <div class="fs-field">
-    <label class="fs-label" for="message">Message</label>
-    <textarea
-      class="fs-textarea"
-      id="message"
-      name="message"
-      required
-    ></textarea>
-    <p class="fs-description">What would you like to discuss?</p>
-  </div>
-  <div class="fs-button-group">
-    <button class="fs-button" type="submit">Submit</button>
+  
+  <div class="form-footer">
+    <button type="submit" class="submit-btn">
+      <span>Submit</span>
+    </button>
   </div>
 </form>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+  /* Contact Form Styles */
+  .contact-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(13, 27, 42, 0.7);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(192, 87, 70, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .form-header h2 {
+    color: #C05746;
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .form-header p {
+    color: #ADB6C4;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field label {
+    color: #EAEAEA;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-family: var(--font-family-display, "Poppins", system-ui, sans-serif);
+  }
+  
+  .form-field input,
+  .form-field textarea {
+    background: rgba(27, 38, 59, 0.8);
+    border: 1px solid rgba(192, 87, 70, 0.3);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: #EAEAEA;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-field input {
+    height: 3rem;
+  }
+  
+  .form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .form-field input:focus,
+  .form-field textarea:focus {
+    outline: none;
+    border-color: #C05746;
+    box-shadow: 0 0 0 2px rgba(192, 87, 70, 0.2);
+  }
+  
+  .field-description {
+    color: #ADB6C4;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+  
+  .form-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submit-btn {
+    background: #C05746;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+  }
+  
+  .submit-btn:hover {
+    background: #AD6A6C;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(192, 87, 70, 0.3);
+  }
+  
+  /* Animation effect for input fields */
+  @keyframes focusAnimation {
+    0% { border-color: rgba(192, 87, 70, 0.3); }
+    50% { border-color: rgba(192, 87, 70, 0.7); }
+    100% { border-color: rgba(192, 87, 70, 0.3); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: 1.5rem;
+    }
+    
+    .form-header h2 {
+      font-size: 1.8rem;
 
-/** Variables **/
-
-:root {
-  --color-background: #e7e7e7;
-  --color-background-alt: #888888;
-  --color-border-active: #da7105;
-  --color-border-default: #d1d1d1;
-  --color-highlight: #fdcf4c;
-  --color-primary: #b64e08;
-  --color-primary-active: #79320e;
-  --color-text-default: #262626;
-  --color-text-muted: #4f4f4f;
-
-  --font-family-body: "Figtree", system-ui, sans-serif;
-  --font-family-display: "Poppins", system-ui, sans-serif;
-}
-
-/** Base **/
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
-
-* {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--font-family-body);
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-feature-settings: inherit;
-  font-variation-settings: inherit;
-  font-size: 100%;
-  font-weight: inherit;
-  line-height: inherit;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-[type="checkbox"],
-[type="radio"],
-[type="range"] {
-  appearance: none;
-  flex-shrink: 0;
-  padding: 0;
-  user-select: none;
-}
-
-[type="checkbox"]:focus,
-[type="radio"]:focus,
-[type="range"]:focus {
-  outline: none;
-}
-
-/** Components **/
-
-.fs-form {
-  display: grid;
-  row-gap: 1.5rem;
-}
-
-.fs-form:where(.fs-layout__2-column) {
-  column-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr;
-}
-
-fieldset {
-  display: grid;
-  row-gap: 1.5rem;
-}
-
-.fs-form:where(.fs-layout__2-column) fieldset {
-  column-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr;
-  grid-column: 1 / -1;
-}
-
-.fs-field {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-}
-
-.fs-label {
-  color: var(--color-text-default);
-  display: block;
-  font-family: var(--font-family-display);
-  font-size: 1rem;
-  line-height: 1.25rem;
-}
-
-.fs-description {
-  color: var(--color-text-muted);
-  display: block;
-  font-size: 1rem;
-  line-height: 1.25rem;
-}
-
-.fs-button-group {
-  display: flex;
-  flex-direction: row-reverse;
-  column-gap: 1.5rem;
-}
-
-.fs-form:where(.fs-layout__2-column) .fs-button-group {
-  grid-column: 1 / -1;
-}
-
-.fs-button {
-  background-color: var(--color-primary);
-  border-radius: 9999px;
-  color: white;
-  cursor: pointer;
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.5rem;
-  padding: 0.75rem 2rem;
-  transition-duration: 200ms;
-  transition-property: background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.fs-button:hover {
-  background-color: var(--color-primary-active);
-}
-
-.fs-button:focus-visible {
-  background-color: var(--color-primary-active);
-  outline: 4px solid var(--color-highlight);
-}
-
-.fs-input,
-.fs-select {
-  appearance: none;
-  border-radius: 9999px;
-  border-width: 0;
-  box-shadow: var(--color-border-default) 0 0 0 1px inset;
-  color: var(--color-text-default);
-  font-size: 1rem;
-  height: 3rem;
-  line-height: 1.5rem;
-  outline: none;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.fs-input:focus-visible,
-.fs-select:focus-visible {
-  box-shadow: var(--color-border-active) 0 0 0 1px inset;
-}
-
-.fs-input::placeholder {
-  color: var(--color-text-muted);
-}
-
-.fs-checkbox-group,
-.fs-radio-group {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-}
-
-.fs-checkbox-field,
-.fs-radio-field {
-  column-gap: 0.5rem;
-  display: flex;
-}
-
-:is(.fs-checkbox-field, .fs-radio-field) .fs-label + .fs-description {
-  margin-top: 0.25rem;
-}
-
-.fs-checkbox-wrapper,
-.fs-radio-wrapper {
-  align-items: center;
-  display: flex;
-  height: 1.25rem;
-}
-
-.fs-checkbox,
-.fs-radio {
-  background-color: #fff;
-  border: 1px solid var(--color-border-default);
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
-.fs-checkbox {
-  border-radius: 0.25rem;
-}
-
-.fs-radio {
-  border-radius: 100%;
-}
-
-.fs-checkbox:checked,
-.fs-radio:checked {
-  background-color: var(--color-primary);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  border-color: transparent;
-}
-
-.fs-checkbox:checked {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-}
-
-.fs-radio:checked {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
-}
-
-.fs-checkbox:focus-visible,
-.fs-radio:focus-visible {
-  border-color: var(--color-border-active);
-  outline: 4px solid var(--color-highlight);
-  outline-offset: 0;
-}
-
-.fs-checkbox:checked:focus-visible,
-.fs-radio:checked:focus-visible {
-  border-color: transparent;
-}
-
-.fs-select {
-  background-color: #fff;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 0.75rem center;
-  background-repeat: no-repeat;
-  background-size: 1.625em 1.625em;
-  padding-right: 2.875rem;
-}
-
-.fs-slider {
-  background: transparent;
-  cursor: pointer;
-  height: 1.25rem;
-  width: 100%;
-}
-
-.fs-slider::-moz-range-track {
-  background-color: var(--color-background);
-  border-radius: 0.5rem;
-  height: 0.5rem;
-}
-
-.fs-slider::-webkit-slider-runnable-track {
-  background-color: var(--color-background);
-  border-radius: 0.5rem;
-  height: 0.5rem;
-}
-
-.fs-slider::-moz-range-thumb {
-  background-color: var(--color-primary);
-  border: none; /* Removes extra border that FF applies */
-  border-radius: 50%;
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
-.fs-slider::-webkit-slider-thumb {
-  appearance: none;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  height: 1.25rem;
-  margin-top: -0.375rem; /* Centers thumb on the track */
-  width: 1.25rem;
-}
-
-.fs-slider:focus-visible::-moz-range-thumb {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.fs-slider:focus-visible::-webkit-slider-thumb {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.fs-switch-field {
-  align-items: center;
-  column-gap: 0.75rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.fs-switch {
-  background-color: var(--color-background-alt);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.75' fill='white'/%3e%3c/svg%3e");
-  background-position: left center;
-  background-repeat: no-repeat;
-  border-radius: 1.25rem;
-  cursor: pointer;
-  height: 1.25rem;
-  transition-duration: 200ms;
-  transition-property: background-color, background-position;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  width: 2.5rem;
-}
-
-.fs-switch:checked {
-  background-color: var(--color-primary);
-  background-position: right center;
-}
-
-.fs-switch:focus-visible {
-  outline: 4px solid var(--color-highlight);
-  outline-offset: 0;
-}
-
-.fs-textarea {
-  appearance: none;
-  border-radius: 0.75rem;
-  border-width: 0;
-  box-shadow: var(--color-border-default) 0 0 0 1px inset;
-  color: var(--color-text-default);
-  font-size: 1rem;
-  line-height: 1.5rem;
-  outline: none;
-  padding: 0.5rem 0.75rem;
-  resize: vertical;
-}
-
-.fs-textarea:focus-visible {
-  box-shadow: var(--color-border-active) 0 0 0 1px inset;
-}
-
-.fs-textarea::placeholder {
-  color: var(--color-text-muted);
-}
+    }
+    
+    .form-header p {
+      font-size: 1rem;
+    }
+    
+    .submit-btn {
+      width: 100%;
+    }
+  }
 </style>

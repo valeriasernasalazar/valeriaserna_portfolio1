@@ -12,7 +12,7 @@
         coverImg: `${base}/book-covers/meditations.jpg`,
         yearPublished: 2006,
         category: "Philosophy",
-        thoughts: "Meditations is one of those books I keep coming back to. Marcus Aurelius’ stoic wisdom really helps me put things into perspective, especially when I’m dealing with challenges in my personal or professional life. His reflections on staying calm, focused, and true to your values resonate deeply with me. It’s not just philosophy – it’s a practical guide to life. Every time I read it, I feel like I’ve learned something new that helps me stay grounded. It’s one of those books that stays with you long after you finish it."
+        thoughts: "Meditations is one of those books I keep coming back to. Marcus Aurelius' stoic wisdom really helps me put things into perspective, especially when I’m facing challenges in my personal or professional life. His thoughts on staying calm, focused, and true to your values really hit home for me. It’s not just philosophy, it’s a practical guide for life. Every time I read it, I feel like I learn something new that helps me stay grounded. It’s one of those books that sticks with you long after you’ve finished it."
       },
       {
         id: 1087293,
@@ -22,7 +22,7 @@
         coverImg: `${base}/book-covers/el-hombre.jpg`,
         yearPublished: 2004,
         category: "Psychology",
-        thoughts: "Man’s Search for Meaning is a book that completely shifted how I view life’s struggles. Frankl’s exploration of finding meaning even in the most painful of circumstances really hit home for me. It’s not just a book about surviving hardship; it’s about understanding that we have the power to choose how we respond to it. His reflections on suffering and purpose are profound, and they’ve stuck with me long after reading it. If you're looking for a book that makes you rethink what’s important in life, this is it."
+        thoughts: "Man’s Search for Meaning is a book that completely changed how I see life’s struggles. Frankl’s take on finding meaning, even in the hardest situations, really resonated with me. It’s not just about surviving hardship, it’s about realizing that we have the power to choose how we respond to it. His reflections on suffering and purpose are deep, and they’ve stayed with me long after reading it. If you’re looking for a book that makes you rethink what truly matters in life, this is the one."
       },
       {
         id: 43317482,
@@ -32,8 +32,8 @@
         coverImg: `${base}/book-covers/dream-house.jpg`,
         yearPublished: 2019,
         category: "Memoir",
-        thoughts: "In the Dream House is a hauntingly beautiful memoir that left me thinking about it for weeks after finishing it. Machado’s storytelling is so unique – she explores a same-sex abusive relationship in a way that’s not often seen in literature. The way she blends memoir with this deeply personal, yet universal, experience is incredibly moving. It’s raw, emotional, and written in a style that feels like a work of art. I especially appreciated how she brought to light an aspect of abuse that isn’t often discussed – the complexities of same-sex relationships and the dynamics of power and control within them. It’s a must-read for anyone interested in the complexities of love, abuse, and identity."
-      },
+        thoughts: "In the Dream House is a hauntingly beautiful memoir that stayed with me for weeks after I finished it. Machado’s storytelling is so unique as she delves into a same-sex abusive relationship in a way that’s rarely seen in literature. The way she mixes memoir with a deeply personal, yet universal, experience is incredibly powerful. It’s raw, emotional, and written in a way that feels like art. I really appreciated how she highlighted an aspect of abuse that’s often overlooked: the complexities of same-sex relationships and the power dynamics within them. It’s a must-read for anyone interested in the complexities of love, abuse, and identity."
+},
       {
         id: 19189061,
         title: "When Things Fall Apart",
@@ -42,7 +42,7 @@
         coverImg: `${base}/book-covers/cuando-todo.jpg`,
         yearPublished: 2011,
         category: "Philosophy",
-        thoughts: "When Things Fall Apart has been my go-to book during tough times, and it’s actually how I started meditating. Pema Chödrön’s teachings on embracing uncertainty and finding peace amidst chaos really resonated with me. Her approach to Buddhist principles – especially the idea of sitting with discomfort rather than avoiding it – gave me a whole new perspective on life’s struggles. This book didn’t just change how I think about hardship; it also motivated me to start meditating as a way to find more balance and peace in my daily life. It’s been a source of inner peace for me whenever things feel overwhelming."
+        thoughts: "When Things Fall Apart has been my go-to book during tough times, and it’s actually how I started meditating. Pema Chödrön’s teachings on embracing uncertainty and finding peace amidst chaos really resonated with me, her approach to Buddhist principles, especially the idea of sitting with discomfort rather than avoiding it, gave me a whole new perspective on life’s struggles. This book didn’t just change how I think about hardship; it also motivated me to start meditating as a way to find more balance and peace in my daily life. It’s been a source of inner peace for me whenever things feel overwhelming."
       },
       {
         id: 41104077,
@@ -72,7 +72,7 @@
         coverImg: `${base}/book-covers/stranger.jpg`,
         yearPublished: 1989,
         category: "Philosophy",
-        thoughts: "Camus’ existential exploration is just as powerful every time I read it. The main character, Meursault, is this strangely detached figure who doesn't conform to society’s expectations about how one should grieve, love, or even live life in general. The book is a brilliant dive into the idea of the absurd—how life is inherently meaningless, yet we still search for meaning and structure in it. I remember the first time I read it and felt that piercing realization: the world is indifferent, and yet we go on making choices. Meursault's famous indifference toward his mother’s death and his eventual crime—it’s jarring, but it’s also a raw depiction of how people live without a prescribed purpose. It’s not the kind of book that’s meant to be comforting or give you answers, but it definitely makes you question everything, even your own existence. The way Camus presents this stark, detached view of life still resonates with me. It’s a book that makes you reflect on what really matters—what’s real and what’s not, and how much control we really have over the choices we make."
+        thoughts: "Camus’ existential exploration is just as powerful every time I read it. The main character, Meursault, is this strangely detached figure who doesn't conform to society’s expectations about how one should grieve, love, or even live life in general. The book is a brilliant dive into the idea of the absurd—how life is inherently meaningless, yet we still search for meaning and structure in it. I remember the first time I read it and felt that piercing realization: the world is indifferent, and yet we go on making choices. It’s not the kind of book that’s meant to be comforting or give you answers, but it definitely makes you question everything, even your own existence. It’s a book that makes you reflect on what really matters—what’s real and what’s not, and how much control we really have over the choices we make."
       },
       {
         id: 40672036,
@@ -82,7 +82,7 @@
         coverImg: `${base}/book-covers/digital-min.jpg`,
         yearPublished: 2019,
         category: "Self Improvement",
-        thoughts: "Digital Minimalism really hit home for me. In a world where we’re constantly bombarded by notifications, apps, and social media, it’s easy to lose sight of what actually matters. Newport’s approach to digital consumption felt like a wake-up call. I’ve always known that I spent too much time on my phone, but I never fully grasped the effect it was having on my attention and overall well-being. Newport doesn’t just tell you to put your phone down and ‘detox.’ Instead, he offers a framework for how to prioritize what’s truly important and intentionally cut out the digital noise. His focus on creating more meaningful digital habits instead of simply avoiding technology resonated with me deeply. It made me realize how easy it is to fill your time with mindless scrolling and how much more fulfilling it can be to engage in activities that actually add value to your life. I started applying some of his strategies, like scheduling time for deep work and decluttering my digital spaces, and I already feel more in control of my time. It's definitely been a shift, but a really necessary one."
+        thoughts: "Digital Minimalism really hit home for me. In a world where we’re constantly bombarded by notifications, apps, and social media, it’s easy to lose sight of what actually matters. Newport’s approach to digital consumption felt like a wake-up call: I’ve always known that I spent too much time on my phone, but I never fully grasped the effect it was having on my attention and overall well-being. Newport doesn’t just tell you to put your phone down and ‘detox’, but instead, he offers a framework for how to prioritize what’s truly important and intentionally cut out the digital noise. His focus on creating more meaningful digital habits instead of simply avoiding technology resonated with me deeply. It made me realize how easy it is to fill your time with mindless scrolling and how much more fulfilling it can be to engage in activities that actually add value to your life. I started applying some of his strategies, like scheduling time for deep work and decluttering my digital spaces, and I already feel more in control of my time. It's definitely been a shift, but a really necessary one."
       },
       {
         id: 53239311,
