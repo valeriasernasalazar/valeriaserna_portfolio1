@@ -743,7 +743,7 @@ button:hover {
     <div class="text">
       <h1>About Me</h1>
       <p class="p11">
-        Hey, I’m Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
+        Hello, I’m Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
              </p>
       <p class="p11">
         I enjoy the challenge of working with messy data and turning it into clear answers. For me, data science is about asking the right questions and uncovering solutions that matter. Even when it’s frustrating, seeing everything come together is totally worth it.

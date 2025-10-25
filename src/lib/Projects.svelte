@@ -113,7 +113,7 @@ date: "2024",
 description: "Developed a comprehensive data security system to protect sensitive information of migrants at Casa Monarca shelter in Monterrey, implementing AES encryption standards and cloud database solutions.",
 tags: ["Data Security", "Encryption", "Cloud Database", "Python"],
 type: "Security",
-imageUrl: "/project-icons/data-security.png",
+imageUrl: "/project-icons/casamonarca.png",
 isNew: true,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -143,8 +143,78 @@ techStack: [
   { name: "PowerBI", level: 65 }
 ]
     },
+    {
+  id: 5,
+  title: "Visualization for TecStore",
+  date: "May 2023",
+  description: "Developed an interactive dashboard to analyze online sales data for TecStore. Identified top-performing products, key customer demographics, and time-based purchase patterns, informing strategic business decisions.",
+  tags: ["Data Visualization", "Dashboard", "Sales Analysis"],
+  type: "Analytics",
+  imageUrl: "/project-icons/data-viz.png", // Placeholder - replace with actual image path
+  isNew: false,
+  detailedDescription: `
+    <h4>Project Overview</h4>
+    <p>This project focused on analyzing online sales data for TecStore, the official merchandise store of Tecnológico de Monterrey. The goal was to support decision-making by visualizing customer behavior and sales patterns across different states in Mexico.</p>
+    
+    <h4>Key Achievements</h4>
+    <ul>
+      <li>Designed a data dashboard highlighting best-selling products and sales distribution by state</li>
+      <li>Identified sweatshirts as the top-selling product across all regions</li>
+      <li>Uncovered late-night shopping trends post-COVID with sales increasing by over 550,000% during 12–5am hours</li>
+      <li>Segmented customer behavior by gender, domain, and location for more personalized marketing strategies</li>
+    </ul>
+    
+    <h4>Technical Details</h4>
+    <p>The dataset was cleaned, translated, and analyzed to extract key patterns. Using filters, users could explore sales data by product, state, customer demographics, and time of purchase. Insights were presented in Spanish, respecting the source data and final audience.</p>
+    
+    <h4>Impact</h4>
+    <p>The visualization enabled regional managers to propose concrete improvements, including location-specific stores, tailored advertising, expanded product designs, and server maintenance planning based on traffic patterns. It showcased how storytelling through data can enhance business strategy.</p>
+  `,
+  techStack: [
+    { name: "Data Visualization", level: 90 },
+    { name: "Sales Analytics", level: 85 },
+    { name: "Exploratory Data Analysis", level: 80 },
+    { name: "Dashboard Design", level: 75 }
+  ]
+},
+{
+  id: 6,
+  title: "Social Service Survey Analysis",
+  date: "June 2023",
+  description: "Built a sentiment analysis model using machine learning to predict student satisfaction in Social Service programs. Deployed an interactive Streamlit dashboard for real-time insights and decision-making.",
+  tags: ["Machine Learning", "Streamlit", "Sentiment Analysis"],
+  type: "Data Science",
+  imageUrl: "/project-icons/survey-analysis.png", // Placeholder - replace with actual image path
+  isNew: false,
+  detailedDescription: `
+    <div>
+      <h4>Project Overview</h4>
+      <p>This project was developed for the Social Service department at Tecnológico de Monterrey to analyze student satisfaction across various Socio Formative Organizations (OSFs). The data came from surveys with open-ended and multiple-choice responses, which had not been analyzed due to inconsistencies and missing values.</p>
+
+      <h4>Key Achievements</h4>
+      <ul>
+        <li>Built a neural network model to predict sentiment scores from structured survey responses</li>
+        <li>Preprocessed and cleaned multiple datasets with null values, contradictions, and formatting issues</li>
+        <li>Created a responsive Streamlit dashboard to visualize satisfaction trends in real time</li>
+        <li>Identified the best-performing model after testing Random Forest, SVR, and Neural Networks</li>
+      </ul>
+
+      <h4>Technical Details</h4>
+      <p>The model predicts sentiment scores for key open-ended questions using a neural network with online training capabilities, allowing adaptability to new data. The dashboard includes filters, color-coded insights, and clustering visualizations to aid strategic decision-making.</p>
+
+      <h4>Impact</h4>
+      <p>This tool empowers the Social Service department to better understand student experiences, optimize partnerships with OSFs, and continuously improve the quality of social service programs. It laid the groundwork for a feedback-driven ecosystem where satisfaction trends are continuously monitored and acted upon.</p>
+    </div>`,
+  techStack: [
+    { name: "Python", level: 90 },
+    { name: "Neural Networks", level: 85 },
+    { name: "Streamlit", level: 80 },
+    { name: "Scikit-learn", level: 75 },
+    { name: "Pandas", level: 90 }
+  ]
+},
       {
-      id: 5,
+      id: 7,
       title: "Vibratory Phenomenon Modeling and Control",
       date: "2024",
       description: "Developed mathematical models to analyze, simulate, and control the vibratory effects of earthquakes on a 68-story building. Achieved a maximum displacement of only 0.00045 meters through implementation of optimal PID control systems.",
@@ -181,7 +251,7 @@ techStack: [
       ]
     },
     {
-id: 6,
+id: 8,
 title: "Air Quality Analysis & Prediction System",
 date: "2023",
 description: "Developed predictive models to analyze and forecast ozone (O3) levels in Monterrey, Mexico. Achieved 84% accuracy with a logistic regression model and created an interactive dashboard for real-time monitoring.",
@@ -218,7 +288,7 @@ techStack: [
 ]
 },
 {
-id: 7,
+id: 9,
 title: "E-commerce Delivery Route Optimization System",
 date: "2023",
 description: "Developed a stochastic optimization algorithm that determines the most efficient delivery routes for e-commerce shipments. Reduced delivery times to a single day while optimizing vehicle and loading dock resources.",
@@ -255,7 +325,7 @@ techStack: [
 ]
 },
 {
-id: 8,
+id: 10,
 title: "Deep Learning for Fashion Image Classification",
 date: "2023",
 description: "Implemented and compared two neural network architectures (LeNet-5 and Siamese Neural Network) for classifying clothing items from the Fashion MNIST dataset, achieving up to 92% accuracy with optimized model parameters.",
@@ -292,7 +362,7 @@ techStack: [
 ]
 },
 {
-id: 9,
+id: 11,
 title: "Tourism Trip Optimization in Mexico City",
 date: "2022",
 description: "Developed an optimization algorithm using the Capacitated Vehicle Routing Problem (CVRP) methodology to create ideal 5-day tourist itineraries for Mexico City, maximizing attraction visits while minimizing travel time between landmark locations.",
@@ -330,7 +400,7 @@ techStack: [
 ]
 },
 {
-id: 10,
+id: 13,
 title: "Security Audit and Mitigation Plan for Educational Institution",
 date: "2023",
 description: "Conducted a comprehensive cybersecurity audit for Instituto Bilingüe la Silla, identifying critical vulnerabilities through Nessus scanning and developing a cost-effective mitigation plan that addressed SSL/TLS vulnerabilities, outdated software systems, and authentication weaknesses.",
@@ -368,7 +438,7 @@ techStack: [
 ]
 },
 {
-id: 11,
+id: 12,
 title: "Mars Rover Intelligent Exploration System",
 date: "2023",
 description: "Designed and implemented intelligent navigation algorithms for Martian terrain exploration, comparing search methods including A*, Greedy, BFS, and simulated annealing to optimize path planning and crater descent for robotic explorers like the Perseverance Rover.",
@@ -407,7 +477,7 @@ techStack: [
 ]
 },
 {
-id: 12,
+id: 14,
 title: "Music Recognition System Using Fast Fourier Transform",
 date: "2022",
 description: "Implemented a Shazam-like music recognition application in MATLAB that identifies songs by genre through Fast Fourier Transform analysis, achieving accurate classification across different music genres including jazz, classical, regional, and power pop.",
@@ -445,7 +515,7 @@ techStack: [
 ]
 },
 {
-id: 13,
+id: 15,
 title: "Analysis of the COVID-19 Pandemic through Data Analysis",
 date: "2020-2022",
 description: "Statistical analysis of COVID-19 data focusing on hospitalization duration differences between pregnant women and other demographic groups, leveraging a stratified sample of 120,000 observations from Mexico's national COVID-19 database.",
