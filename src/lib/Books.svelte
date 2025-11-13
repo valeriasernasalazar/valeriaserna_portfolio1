@@ -520,7 +520,7 @@
                   book.id !== selectedBook.id && 
                   (book.category === selectedBook.category || book.rating === selectedBook.rating)
                 ).slice(0, 3) as recommendation}
-                  <div class="recommendation-card" on:click={() => {
+                  <button type="button" class="recommendation-card" on:click={() => {
                     selectedBook = recommendation;
                   }}>
                     <img 
@@ -532,7 +532,7 @@
                       <h5>{recommendation.title}</h5>
                       <div class="rec-rating">{renderStars(recommendation.rating)}</div>
                     </div>
-                  </div>
+                  </button>
                 {/each}
               </div>
             </div>
@@ -1132,13 +1132,7 @@
       border-radius: 5px 5px 0 0;
       transition: height 0.8s ease;
     }
-    
-    .viz-caption {
-      font-size: 0.9rem;
-      color: #ADB6C4;
-      font-style: italic;
-    }
-    
+        
     /* Media Queries */
     @media (max-width: 768px) {
       .modal-book-header {
