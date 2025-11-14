@@ -1,13 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import { base } from '$app/paths'; // Import the base path
+  import { base } from '$app/paths';
   import { goto } from '$app/navigation';
   import Projects from '$lib/Projects.svelte';
   import Books from '$lib/Books.svelte';
   import FunStuff from "$lib/FunStuff.svelte";
-    import Contact from "$lib/Contact.svelte";
+  import Contact from "$lib/Contact.svelte";
   
-
   const navLinks = [
     { id: "home", label: "Home", href: "/home" },
     { id: "about", label: "About Me", href: "/about" },
@@ -35,7 +34,6 @@
   
   function toggleMobileMenu() {
     mobileMenuOpen = !mobileMenuOpen;
-    // Prevent scrolling when menu is open
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -46,6 +44,43 @@
   function closeMobileMenu() {
     mobileMenuOpen = false;
     document.body.style.overflow = '';
+  }
+  
+  // Handle keyboard events for menu overlay
+  function handleOverlayKeydown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      closeMobileMenu();
+    }
+  }
+  
+  // Handle smooth scroll to sections
+  function handleNavClick(event, href) {
+    const url = new URL(href, window.location.origin);
+    
+    // Check if it's a hash link on the same page
+    if (url.hash && (url.pathname === window.location.pathname || href.startsWith('/#'))) {
+      event.preventDefault();
+      closeMobileMenu();
+      
+      const targetId = url.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update URL without triggering navigation
+        history.pushState(null, '', url.hash);
+      }
+    } else if (href === '/' || href === '') {
+      // Handle home link
+      event.preventDefault();
+      closeMobileMenu();
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', '/');
+      }
+    }
   }
   
   /* Desktop menu handling */
@@ -69,8 +104,38 @@
       requestAnimationFrame(updateNavbar);
     }
     
+    // Handle browser back/forward buttons
+    function handlePopState() {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetId = hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        // No hash means we're at the home section
+        const homeSection = document.getElementById('home');
+        if (homeSection) {
+          homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+    
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('popstate', handlePopState);
     requestAnimationFrame(updateNavbar);
+    
+    // Handle initial page load with hash
+    if (window.location.hash) {
+      setTimeout(() => {
+        const targetId = window.location.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
     
     // Add event listener for eye movement
     const moveEyes = (e) => {
@@ -118,11 +183,13 @@
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('popstate', handlePopState);
       document.removeEventListener("mousemove", moveEyes);
       document.removeEventListener("mouseout", resetEyes);
     };
   });
 </script>
+
 <style>
 /* Global Styles */
 :global(html) {
@@ -142,6 +209,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 :global(html) {
@@ -152,8 +220,8 @@
   padding-top: 70px;
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 100px; /* Account for the navbar height */
+  scroll-snap-type: mandatoru;
+  scroll-padding-top: 100px;
 }
 
 .container section {
@@ -182,6 +250,13 @@ nav {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Enhanced styles when scrolled - applied via :global() to avoid unused selector warning */
+:global(nav.scrolled) {
+  background: rgba(13, 27, 42, 0.98) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
 }
 
 @media (min-width: 768px) {
@@ -190,19 +265,15 @@ nav {
   }
 }
 
-/* Nav transitions and animations */
-nav {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
+/* Enhanced styles when scrolled */
 nav.scrolled {
   background: rgba(13, 27, 42, 0.98);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 nav ul {
   list-style: none;
-  display: none; /* Hidden by default on mobile */
+  display: none;
   margin: 0;
   padding: 0;
 }
@@ -290,11 +361,11 @@ nav > ul li a {
   font-weight: 600;
   font-size: 1rem;
   transition: color 0.3s ease;
-  white-space: nowrap; /* Ensure no wrapping for individual links */
+  white-space: nowrap;
 }
 
 nav > ul li a:hover {
-  color: #C05746; /* Hover color */
+  color: #C05746;
 }
 
 /* Profile styling */
@@ -322,7 +393,7 @@ nav > ul li a:hover {
   border-radius: 50%;
 }
 
-/* Eye styling - FIXED POSITIONING */
+/* Eye styling */
 .eye {
   position: absolute;
   width: 12px;
@@ -353,7 +424,6 @@ nav > ul li a:hover {
   transition: transform 0.1s;
 }
 
-/* Fixed positioning for eyes */
 #leftEye {
   position: absolute;
   top: 40%;
@@ -389,7 +459,6 @@ section {
   align-items: center;
   text-align: center;
   padding: 2rem 1rem;
-  scroll-snap-align: start;
   background: rgba(27, 38, 59, 0.95);
   position: relative;
 }
@@ -488,7 +557,7 @@ section {
     justify-content: center;
     align-items: center;
     background: rgba(27, 38, 59, 0.95);
-    color: #EAEAEA;
+    color: #ffffff;
     padding: 2rem 1rem;
     gap: 2rem;
 }
@@ -616,24 +685,6 @@ section p {
   }
 }
 
-/* Fun facts section */
-.fact-box {
-  padding: 1.2rem;
-  background: #0D1B2A;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 1.5rem 0;
-  width: 90%;
-}
-
-@media (min-width: 768px) {
-  .fact-box {
-    padding: 1.5rem;
-    margin: 2rem 0;
-    width: auto;
-  }
-}
-
 button {
   padding: 0.75rem 1.5rem;
   background: #C05746;
@@ -677,10 +728,10 @@ button:hover {
   opacity: 1;
   visibility: visible;
 }
-.projectsf, .booksf, .funstufff, .contactmef{
+
+.projectsf, .booksf, .funstufff, .contactmef {
   margin-top: 10vh;
 }
-
 </style>
 
 <nav>
@@ -698,12 +749,12 @@ button:hover {
   
   <!-- Desktop menu -->
   <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="#about">About Me</a></li>
-    <li><a href="/#projects">Projects</a></li>
-    <li><a href="/#books">Books</a></li>
-    <li><a href="/#fun">Fun Stuff</a></li>
-    <li><a href="/#contact">Contact</a></li>
+    <li><a href="/" on:click={(e) => handleNavClick(e, '/')}>Home</a></li>
+    <li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About Me</a></li>
+    <li><a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Projects</a></li>
+    <li><a href="/#books" on:click={(e) => handleNavClick(e, '/#books')}>Books</a></li>
+    <li><a href="/#fun" on:click={(e) => handleNavClick(e, '/#fun')}>Fun Stuff</a></li>
+    <li><a href="/#contact" on:click={(e) => handleNavClick(e, '/#contact')}>Contact</a></li>
   </ul>
   
   <!-- Mobile menu button -->
@@ -716,47 +767,52 @@ button:hover {
 <div class="mobile-menu {mobileMenuOpen ? 'open' : ''}">
   <button class="mobile-menu-close" on:click={closeMobileMenu}>×</button>
   <ul>
-    <li><a href="/" on:click={closeMobileMenu}>Home</a></li>
-    <li><a href="#about" on:click={closeMobileMenu}>About Me</a></li>
-    <li><a href="/#projects" on:click={closeMobileMenu}>Projects</a></li>
-    <li><a href="/#books" on:click={closeMobileMenu}>Books</a></li>
-    <li><a href="/#fun" on:click={closeMobileMenu}>Fun Stuff</a></li>
-    <li><a href="/#contact" on:click={closeMobileMenu}>Contact</a></li>
+    <li><a href="/" on:click={(e) => handleNavClick(e, '/')}>Home</a></li>
+    <li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About Me</a></li>
+    <li><a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Projects</a></li>
+    <li><a href="/#books" on:click={(e) => handleNavClick(e, '/#books')}>Books</a></li>
+    <li><a href="/#fun" on:click={(e) => handleNavClick(e, '/#fun')}>Fun Stuff</a></li>
+    <li><a href="/#contact" on:click={(e) => handleNavClick(e, '/#contact')}>Contact</a></li>
   </ul>
 </div>
 
-<!-- Overlay for mobile menu -->
-<div class="menu-overlay {mobileMenuOpen ? 'visible' : ''}" on:click={closeMobileMenu}></div>
+<!-- Overlay for mobile menu with proper accessibility -->
+<div 
+  class="menu-overlay {mobileMenuOpen ? 'visible' : ''}" 
+  on:click={closeMobileMenu}
+  on:keydown={handleOverlayKeydown}
+  role="button"
+  tabindex="0"
+  aria-label="Close menu overlay"
+></div>
 
 <div class="container">
   <section id="home">
     <h1>Hello, I'm Valeria Serna</h1>
-    <p>Expert at turning coffee ☕ and code 💻 into insights that matter.</p>
+    <p>Expert at turning coffee ☕ and code 💻 into scalable systems for data-driven impact.</p>
     <div class="cta-buttons">
-      <a href="/#projects">View My Projects</a>
-      <a href="/#contact">Contact Me</a>
+      <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>View My Projects</a>
+      <a href="/#contact" on:click={(e) => handleNavClick(e, '/#contact')}>Contact Me</a>
     </div>
   </section>
 
   <section id="about">
-    <!-- Text on the Left -->
     <div class="text">
       <h1>About Me</h1>
       <p class="p11">
-        Hello, I’m Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
-             </p>
-      <p class="p11">
-        I really enjoy the challenge of working with messy data and turning it into clear answers. For me, data science is about asking the right questions and uncovering solutions that matter. Even when it’s frustrating, seeing everything come together is totally worth it.
+        Hello, I'm Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
       </p>
       <p class="p11">
-        When I’m not working with data, I’m usually reading. I love philosophical books like Meditations by Marcus Aurelius or anything that makes me think differently. Oh, and coffee is always nearby—it’s key to my creative process!
+        I really enjoy the challenge of working with messy data and turning it into clear answers. For me, data science is about asking the right questions and uncovering solutions that matter. Even when it's frustrating, seeing everything come together is totally worth it.
+      </p>
+      <p class="p11">
+        When I'm not working with data, I'm usually reading. I love philosophical books like Meditations by Marcus Aurelius or anything that makes me think differently. Oh, and coffee is always nearby—it's key to my creative process!
       </p>
       <div class="cta-buttons">
-        <a href="/#projects">Get a look at my projects!</a>
+        <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Get a look at my projects!</a>
       </div>
     </div>
     
-    <!-- Profile Image on the Right -->
     <img src="{base}/foto2.png" alt="Valeria Serna" />
   </section>
     
