@@ -732,6 +732,17 @@ button:hover {
 .projectsf, .booksf, .funstufff, .contactmef {
   margin-top: 10vh;
 }
+.inline-link {
+  color: #C05746;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.inline-link:hover {
+  color: #AD6A6C;
+  text-decoration: underline;
+}
 </style>
 
 <nav>
@@ -800,13 +811,18 @@ button:hover {
     <div class="text">
       <h1>About Me</h1>
       <p class="p11">
-        Hello, I'm Valeria Serna, a data scientist with a strong curiosity for solving problems and finding patterns in data. My interest in how things work led me to dive into stats, programming, and machine learning. I love the moment when raw data clicks and reveals insights that drive real decisions.
+
+        Hello, I'm Valeria Serna, a data engineer that enjoys finding structure in chaos. I'm particularly passionate about building data pipelines and systems that make data reliable, accesible, and useful for gathering meaningful insights. I currently use Python, SQL, and cloud platforms like AWS to create efficient data workflows.
+
       </p>
       <p class="p11">
-        I really enjoy the challenge of working with messy data and turning it into clear answers. For me, data science is about asking the right questions and uncovering solutions that matter. Even when it's frustrating, seeing everything come together is totally worth it.
+        My B.S. in Data Science and Applied Mathematics gave me a strong background in statistics, data analysis, AI, cybsersecurity, ML, and mathematical optimization, which allows me to approach everyday tasks and possible challenges that could arise with a unique perspective and skill set.
       </p>
       <p class="p11">
-        When I'm not working with data, I'm usually reading. I love philosophical books like Meditations by Marcus Aurelius or anything that makes me think differently. Oh, and coffee is always nearby—it's key to my creative process!
+        Besides from the technical side of things, I love collaborationg with interdisciplinary teams in order to solve problems and deliver data-driven solutions that have a real impact. I have actually found that this is the most rewarding part of my work as a data engineer, as I get to learn from others while also sharing my own knowledge and expertise.
+      </p>
+      <p class="p11">
+        In a more personal note, I really like reading (don't worry, you can find my most recent thoughts and reviews <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#books')}>here</a>!), and drinking a good cup of coffee, hobby that I have recently adopted and have found to be one of the very best parts of my day. If you want to know more about it I have not given it, yet, a dedicated part of my page so, for now, feel free to <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#contact')}>contact me</a> and ask away because I love to talk about it!
       </p>
       <div class="cta-buttons">
         <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Get a look at my projects!</a>

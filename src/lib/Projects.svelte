@@ -707,36 +707,46 @@ techStack: [
   
     <!-- Projects grid with only 6 projects visible -->
     <div class="projects-grid">
-      {#each displayedProjects as project}
-        <div class="project-card {project.isNew ? 'new' : ''}" data-id={project.id}>
-          <div class="project-header">
-            <div class="project-title">{project.title}</div>
-            <div class="project-date">{project.date}</div>
-          </div>
-          <div class="project-content">
-            <!-- Project icon image -->
-            <div class="project-visualization">
-              <div class="project-image-container">
-                <img 
-                  src={project.imageUrl} 
-                  alt={`${project.title} icon`} 
-                  class="project-image"
-                  on:error={(e) => e.target.src = '/project-icons/place-holder.jpg'}
-                />
-              </div>
-            </div>
-            <p>{project.description}</p>
-            <div class="tags">
-              {#each project.tags as tag}
-                <span>{tag}</span>
-              {/each}
+{#each displayedProjects as project}
+      <div
+        class="project-card {project.isNew ? 'new' : ''}"
+        data-id={project.id}
+        on:click={() => showProjectDetails(project)}
+        style="cursor: pointer;"
+      >
+        <div class="project-header">
+          <div class="project-title">{project.title}</div>
+          <div class="project-date">{project.date}</div>
+        </div>
+        <div class="project-content">
+          <!-- Project icon image -->
+          <div class="project-visualization">
+            <div class="project-image-container">
+              <img 
+                src={project.imageUrl} 
+                alt={`${project.title} icon`} 
+                class="project-image"
+                on:error={(e) => e.target.src = '/project-icons/place-holder.jpg'}
+              />
             </div>
           </div>
-          <div class="project-footer">
-            <button class="project-btn" on:click={() => showProjectDetails(project)}>View Details</button>
+          <p>{project.description}</p>
+          <div class="tags">
+            {#each project.tags as tag}
+              <span>{tag}</span>
+            {/each}
           </div>
         </div>
-      {/each}
+        <div class="project-footer">
+          <button
+            class="project-btn"
+            on:click|stopPropagation={() => showProjectDetails(project)}
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+    {/each}
     </div>
     
     <!-- Pagination controls -->
@@ -846,54 +856,87 @@ techStack: [
       </div>
     </div>
         
-    <!-- Project details modal -->
-    {#if selectedProject}
-      <div class="project-modal active" on:click={(e) => {
-        if (e.target.classList.contains('project-modal')) closeProjectModal();
-      }}>
-        <div class="modal-content">
-          <button class="modal-close" on:click={closeProjectModal}>×</button>
-          <div class="modal-header">
-            <h3>{selectedProject.title}</h3>
-            <div class="project-date">{selectedProject.date}</div>
-            <div class="tags">
+<!-- Project details modal -->
+<!-- Project details modal -->
+{#if selectedProject}
+  <div class="project-modal active" on:click={(e) => {
+    if (e.target.classList.contains('project-modal')) closeProjectModal();
+  }}>
+    <div class="modal-content">
+      <button class="modal-close" on:click={closeProjectModal}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      
+      <!-- Two Column Layout -->
+      <div class="modal-layout">
+        <!-- Left Column: Image & Meta -->
+        <div class="modal-sidebar">
+          <div class="sidebar-image">
+            <img 
+              src={selectedProject.imageUrl} 
+              alt={`${selectedProject.title}`} 
+              class="project-thumbnail"
+              on:error={(e) => e.target.src = '/project-icons/placeholder.png'}
+            />
+          </div>
+          
+          <div class="sidebar-meta">
+            <div class="meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-value">{selectedProject.date}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Category</span>
+              <span class="meta-value">{selectedProject.type}</span>
+            </div>
+          </div>
+
+          <div class="sidebar-tags">
+            <span class="tags-label">Technologies</span>
+            <div class="tags-list">
               {#each selectedProject.tags as tag}
-                <span>{tag}</span>
+                <span class="tech-tag">{tag}</span>
               {/each}
             </div>
           </div>
-          <div class="modal-body">
-            <div class="modal-image-container">
-              <img 
-                src={selectedProject.imageUrl} 
-                alt={`${selectedProject.title} illustration`} 
-                class="modal-image"
-                on:error={(e) => e.target.src = '/project-icons/placeholder.png'}
-              />
-            </div>
-            <div class="project-details">
-              {@html selectedProject.detailedDescription}
-              
-              <div class="tech-stack">
-                <div class="tech-stack-title">Technologies Used</div>
-                {#if selectedProject.techStack}
-                  {#each selectedProject.techStack as tech}
-                    <div class="tech-item">
-                      <div class="tech-name">{tech.name}</div>
-                      <div class="skill-bar">
-                        <div class="skill-level" style="width: {tech.level}%"></div>
-                      </div>
+        </div>
+
+        <!-- Right Column: Content -->
+        <div class="modal-main">
+          <h1 class="project-title">{selectedProject.title}</h1>
+          
+          <div class="project-content">
+            {@html selectedProject.detailedDescription}
+          </div>
+          
+          <!-- Tech Stack -->
+          {#if selectedProject.techStack && selectedProject.techStack.length > 0}
+            <div class="skills-section">
+              <h3 class="skills-heading">Technical Proficiency</h3>
+              <div class="skills-list">
+                {#each selectedProject.techStack as tech}
+                  <div class="skill-item">
+                    <div class="skill-info">
+                      <span class="skill-name">{tech.name}</span>
+                      <span class="skill-percentage">{tech.level}%</span>
                     </div>
-                  {/each}
-                {/if}
+                    <div class="skill-bar-container">
+                      <div class="skill-bar-fill" style="width: {tech.level}%"></div>
+                    </div>
+                  </div>
+                {/each}
               </div>
             </div>
-          </div>
+          {/if}
         </div>
       </div>
-    {/if}
+    </div>
+  </div>
+{/if}
   </section>
-  
+
   <style>
   /* Projects Styles */
   #projects {
@@ -902,25 +945,45 @@ techStack: [
     min-height: 100vh;
   }
   
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-items: center;
+}
+  /* Restore project card title style */
+.projects-grid .project-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #EAEAEA;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  line-height: 1.2;
+  transition: color 0.2s;
+}
+
+.projects-grid .project-title:hover {
+  color: #C05746;
+}
   
-  .project-card {
-    background: #0D1B2A;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    position: relative;
-  }
-  
+.project-card {
+  background: #0D1B2A;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
   .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
@@ -969,21 +1032,46 @@ techStack: [
     font-weight: bold;
   }
   
+/* --- Move date to top right below title, above image --- */
+.project-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  border-bottom: none;
+  position: relative;
+}
+
+.projects-grid .project-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #EAEAEA;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  line-height: 1.2;
+  transition: color 0.2s;
+  width: 100%;
+}
+
+.project-date {
+  font-size: 0.95rem;
+  color: #ADB6C4;
+  align-self: flex-end;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
   .project-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(173, 106, 108, 0.2);
-    display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 1.5rem 0 1.5rem;
   }
-  
-  @media (min-width: 768px) {
-    .project-header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
+  .project-date {
+    font-size: 1rem;
   }
-  
+}  
   .project-title {
     font-size: 1.3rem;
     font-weight: 700;
@@ -1009,55 +1097,47 @@ techStack: [
     flex-direction: column;
   }
   
-  .project-visualization {
-    height: 180px;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  
-  /* New image styles */
-  .project-image-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(13, 27, 42, 0.7);
-    border-radius: 8px;
-    padding: 1rem;
-  }
-  
-  .project-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-  
-  .project-image:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Modal image styling */
-  .modal-image-container {
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    background: rgba(13, 27, 42, 0.7);
-    border-radius: 8px;
-    padding: 1rem;
-    max-height: 200px;
-  }
-  
-  .modal-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
+.project-visualization {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* New image styles */
+.project-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(13, 27, 42, 0.7);
+  border-radius: 8px;
+  /* Reduce padding to avoid off-centering */
+  padding: 0rem;
+  border: 1px solid rgba(192, 87, 70, 0.2);
+  box-sizing: border-box;
+}
+
+.project-image {
+  max-width: 100%;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.project-image:hover,
+.project-thumbnail:hover {
+  transform: scale(1.5);
+  z-index: 2;
+}
   .project-card p {
     font-size: 1rem;
     line-height: 1.6;
@@ -1111,205 +1191,428 @@ techStack: [
     transform: scale(1.1);
   }
   
-  /* Project details modal */
-  .project-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 27, 42, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    padding: 1rem;
+/* ===================================
+   MODAL STYLES - CLEAN & PROFESSIONAL
+   =================================== */
+
+.project-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(13, 27, 42, 0.97);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.project-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #0D1B2A;
+  width: 100%;
+  max-width: 1100px;
+  margin: 2.5rem auto 2.5rem auto; /* top margin, then auto for horizontal, then bottom margin */
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 
+    0 0 0 1px rgba(192, 87, 70, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.96);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.project-modal.active .modal-content {
+  transform: scale(1);
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(13, 27, 42, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(192, 87, 70, 0.4);
+  border-radius: 50%;
+  color: #C05746;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+
+.modal-close:hover {
+  background: #C05746;
+  border-color: #C05746;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Two Column Layout */
+.modal-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: unset;
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .modal-layout {
+    grid-template-columns: 300px 1fr;
   }
-  
-  .project-modal.active {
-    opacity: 1;
-    visibility: visible;
+  .modal-sidebar {
+    padding: 2rem;
+    border-right: 1px solid rgba(192, 87, 70, 0.15);
   }
-  
+}
+
+@media (min-width: 1024px) {
   .modal-content {
-    background: #1b263b;
-    width: 90%;
-    max-width: 800px;
-    max-height: 85vh;
-    overflow-y: auto;
-    border-radius: 12px;
-    padding: 1.5rem;
-    position: relative;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    transform: translateY(-30px);
-    transition: all 0.3s ease;
+    max-width: 90%;
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal-layout {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+  .modal-content {
+    max-width: 1200px;
+  }
+  .modal-layout {
+    grid-template-columns: 340px 1fr;
+  }
+}
+/* Modal Sidebar */
+.modal-sidebar {
+  padding: 2rem 1.5rem;
+  background: rgba(13, 27, 42, 0.5);
+}
+
+@media (min-width: 768px) {
+  .modal-sidebar {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.sidebar-image {
+  width: 100%;
+  min-height: 180px;
+  aspect-ratio: 1 / 1;
+  background: rgba(13, 27, 42, 0.8);
+  border-radius: 12px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(192, 87, 70, 0.2);
+  box-sizing: border-box;
+}
+
+.project-thumbnail {
+  max-width: 100%;
+  max-height: 220px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.sidebar-meta {
+  margin-bottom: 2rem;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(192, 87, 70, 0.1);
+}
+
+.meta-item:last-child {
+  border-bottom: none;
+}
+
+.meta-label {
+  font-size: 0.875rem;
+  color: #ADB6C4;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-value {
+  font-size: 0.9375rem;
+  color: #EAEAEA;
+  font-weight: 600;
+}
+
+.sidebar-tags {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(192, 87, 70, 0.15);
+}
+
+.tags-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #ADB6C4;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.875rem;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  padding: 0.375rem 0.75rem;
+  background: rgba(192, 87, 70, 0.15);
+  color: #C05746;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(192, 87, 70, 0.3);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.modal-main {
+  padding: 2.5rem 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80vh;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .modal-main {
+    padding: 3rem 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-main {
+    padding: 3rem 3.5rem;
+  }
+}
+.project-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #EAEAEA;
+  margin: 0 0 2rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .project-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Project Content */
+.project-content {
+  color: #EAEAEA;
+  margin-bottom: 3rem;
+  text-align: left; /* <-- Add this line */
+}
+
+.project-content h4:first-child {
+  margin-top: 0;
+}
+
+.project-content p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  color: rgba(234, 234, 234, 0.9);
+  font-size: 1rem;
+}
+
+.project-content ul {
+  margin: 1.25rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.project-content ul li {
+  position: relative;
+  margin-bottom: 0.875rem;
+  padding-left: 1.75rem;
+  line-height: 1.7;
+  color: rgba(234, 234, 234, 0.9);
+}
+
+.project-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  background: #C05746;
+  border-radius: 50%;
+}
+
+/* Skills Section */
+.skills-section {
+  padding-top: 2.5rem;
+  border-top: 2px solid rgba(192, 87, 70, 0.2);
+}
+
+.skills-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #C05746;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.01em;
+}
+
+.skills-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.skill-item {
+  background: rgba(27, 38, 59, 0.4);
+  border: 1px solid rgba(192, 87, 70, 0.15);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.skill-item:hover {
+  background: rgba(27, 38, 59, 0.6);
+  border-color: rgba(192, 87, 70, 0.3);
+  transform: translateX(4px);
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+}
+
+.skill-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #EAEAEA;
+  letter-spacing: 0.01em;
+}
+
+.skill-percentage {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #C05746;
+  background: rgba(192, 87, 70, 0.15);
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+}
+
+.skill-bar-container {
+  height: 6px;
+  background: rgba(192, 87, 70, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C05746 0%, #AD6A6C 100%);
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(192, 87, 70, 0.4);
+}
+
+/* Scrollbar */
+.modal-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-main::-webkit-scrollbar-track {
+  background: rgba(13, 27, 42, 0.5);
+}
+
+.modal-main::-webkit-scrollbar-thumb {
+  background: rgba(192, 87, 70, 0.4);
+  border-radius: 4px;
+}
+
+.modal-main::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 87, 70, 0.6);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 899px) {
+  .modal-sidebar {
+    border-right: none;
+    border-bottom: 1px solid rgba(192, 87, 70, 0.15);
+    padding: 2rem 1.5rem;
   }
   
-  @media (min-width: 768px) {
-    .project-modal {
-      padding: 0;
-    }
-    
-    .modal-content {
-      width: 80%;
-      padding: 2rem;
-    }
+  .sidebar-image {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-main {
+    padding: 2rem 1.5rem;
   }
   
-  .project-modal.active .modal-content {
-    transform: translateY(0);
+  .modal-sidebar {
+    padding: 1.5rem 1rem;
   }
   
-  .modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: #EAEAEA;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    z-index: 2;
+  .project-title {
+    font-size: 1.75rem;
   }
-  
-  .modal-close:hover {
-    color: #C05746;
-  }
-  
-  .modal-header {
-    margin-bottom: 1.5rem;
-  }
-  
-  .modal-header h3 {
-    font-size: 1.6rem;
-    color: #C05746;
-    margin-bottom: 0.5rem;
-  }
-  
-  @media (min-width: 768px) {
-    .modal-header h3 {
-      font-size: 2rem;
-    }
-  }
-  
-  .modal-body {
-    margin-bottom: 1.5rem;
-  }
-  
-  .modal-body h4 {
-    font-size: 1.3rem;
-    color: #EAEAEA;
-    margin-bottom: 1rem;
-    margin-top: 1.5rem;
-  }
-  
-  .modal-body p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-  
-  .modal-body ul {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .modal-body ul li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .tech-stack {
-    margin-top: 2rem;
-    border-top: 1px solid rgba(173, 106, 108, 0.2);
-    padding-top: 1.5rem;
-  }
-  
-  .tech-stack-title {
-    font-size: 1.2rem;
-    color: #C05746;
-    margin-bottom: 1rem;
-  }
-  
-  .tech-item {
-    margin-bottom: 1rem;
-  }
-  
-  .tech-name {
-    margin-bottom: 0.3rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .tech-name::after {
-    content: attr(data-level) '%';
-    color: #ADB6C4;
-  }
-  
-  .skill-bar {
-    height: 10px;
-    background: rgba(192, 87, 70, 0.2);
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    overflow: hidden;
-  }
-  
-  .skill-level {
-    height: 100%;
-    background: #C05746;
-    border-radius: 5px;
-    transition: width 1s ease;
-  }
-  
-  /* Animation for project cards */
-  .project-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s forwards;
-  }
-  
-  /* Stagger the animations */
-  .project-card:nth-child(1) { animation-delay: 0.1s; }
-  .project-card:nth-child(2) { animation-delay: 0.2s; }
-  .project-card:nth-child(3) { animation-delay: 0.3s; }
-  .project-card:nth-child(4) { animation-delay: 0.4s; }
-  .project-card:nth-child(5) { animation-delay: 0.5s; }
-  .project-card:nth-child(6) { animation-delay: 0.6s; }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Highlight animation for newly added projects */
-  .project-card.new::after {
-    content: 'New';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #C05746;
-    color: white;
-    padding: 0.3rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    animation: pulse 1.5s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
-  
+}
+
+.project-title,
+.projects-grid .project-title {
+  color: #C05746; /* Pink */
+}
+
+.project-content h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #C05746; /* Pink */
+  margin: 2.5rem 0 1rem 0;
+  letter-spacing: -0.01em;
+}
+
   /* Filter controls */
   .filter-controls {
     display: flex;
@@ -1483,4 +1786,25 @@ techStack: [
 .p1{
   margin-top:-6vh;
 }
-</style>
+.project-content h4,
+.project-content :global(h4) {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem 0;
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-bottom: 0.4rem;
+}
+
+.project-content h4::after,
+.project-content :global(h4)::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: #fff;
+  opacity: 0.18;
+  border-radius: 2px;
+  margin-top: 0.4rem;
+}</style>
