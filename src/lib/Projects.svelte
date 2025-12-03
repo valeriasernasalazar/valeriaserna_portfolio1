@@ -1,7 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { base } from '$app/paths';
+    import { Result } from "postcss";
 
+  
   // Project data
   const projects = [
     {
@@ -13,14 +15,16 @@
       type: "AI",
       imageUrl: "/project-icons/traffic-vision.png",
       isNew: true,
+      github: 'https://github.com/valeriasernasalazar/ConteoVehiculos',
+      resultsPdf: '/results/traffic-vision.pdf',
       detailedDescription: `
         <h4>Project Overview</h4>
         <p>This project involved developing an AI system capable of analyzing and counting traffic in real-time using the YOLO (You Only Look Once) object detection algorithm. The system was implemented at Tec de Monterrey in Distrito Tec.</p>
         
         <h4>Key Achievements</h4>
         <ul>
-          <li>Analyzed over 20 hours of footage with 89% accuracy in vehicle detection</li>
-          <li>Implemented YOLO v5 for real-time object detection</li>
+          <li>Analyzed over 100 hours of footage with 89% accuracy in vehicle detection</li>
+          <li>Implemented YOLO v11 for real-time object detection</li>
           <li>Created a dashboard for visualization of traffic patterns</li>
           <li>Reduced manual counting time by 95%</li>
         </ul>
@@ -69,7 +73,6 @@
         { name: "Python", level: 95 },
         { name: "Selenium", level: 90 },
         { name: "Google Cloud", level: 75 },
-        { name: "Web Scraping", level: 85 }
       ]
     },
     {
@@ -103,7 +106,6 @@
         { name: "Tableau", level: 90 },
         { name: "SQL", level: 85 },
         { name: "Data Analysis", level: 80 },
-        { name: "UX Design", level: 75 }
       ]
     },
       {
@@ -115,6 +117,11 @@ tags: ["Data Security", "Encryption", "Cloud Database", "Python"],
 type: "Security",
 imageUrl: "/project-icons/casamonarca.png",
 isNew: true,
+github: 'https://github.com/valeriasernasalazar/CasaMonarcaProyectoDatos',
+resultsPdfs: [
+  { label: "Download Presentation", url: "/results/casa-monarca.pdf" },
+  { label: "Download Report", url: "/results/MA2006B_reporteFinal.pdf" }
+],
 detailedDescription: `
   <h4>Project Overview</h4>
   <p>This project involved creating a robust data protection system for "Casa Monarca - Ayuda humanitaria al migrante A.B.P.", a migrant shelter in Monterrey. The system safeguards sensitive personal information of vulnerable migrants through modern encryption methods and secure cloud storage.</p>
@@ -136,11 +143,10 @@ detailedDescription: `
 `,
 techStack: [
   { name: "Python", level: 90 },
-  { name: "AES Encryption", level: 85 },
+  { name: "PowerBI", level: 85 },
   { name: "PostgreSQL", level: 80 },
-  { name: "Google Cloud", level: 75 },
   { name: "HTML/CSS/JavaScript", level: 70 },
-  { name: "PowerBI", level: 65 }
+  { name: "AES Encryption", level: 85 }
 ]
     },
     {
@@ -150,7 +156,8 @@ techStack: [
   description: "Developed an interactive dashboard to analyze online sales data for TecStore. Identified top-performing products, key customer demographics, and time-based purchase patterns, informing strategic business decisions.",
   tags: ["Data Visualization", "Dashboard", "Sales Analysis"],
   type: "Analytics",
-  imageUrl: "/project-icons/data-viz.png", // Placeholder - replace with actual image path
+  imageUrl: "/project-icons/data-viz.png", 
+  resultsPdf: '/results/casa-monarca.pdf',
   isNew: false,
   detailedDescription: `
     <h4>Project Overview</h4>
@@ -185,6 +192,8 @@ techStack: [
   tags: ["Machine Learning", "Streamlit", "Sentiment Analysis"],
   type: "Data Science",
   imageUrl: "/project-icons/survey-analysis.png", // Placeholder - replace with actual image path
+  resultsPdf: '/results/servicio-social.pdf',
+  github: 'https://github.com/valeriasernasalazar/ServicioSocialNLP',
   isNew: false,
   detailedDescription: `
     <div>
@@ -221,6 +230,7 @@ techStack: [
       tags: ["Mathematical Modeling", "Vibration Analysis", "PID Control", "Structural Engineering"],
       type: "Engineering",
       imageUrl: "/project-icons/vibration-control.png",
+      resultsPdf: '/results/vibratory-modeling.pdf',
       isNew: true,
       detailedDescription: `
         <h4>Project Overview</h4>
@@ -247,7 +257,6 @@ techStack: [
         { name: "Differential Equations", level: 85 },
         { name: "Python", level: 80 },
         { name: "MATLAB/Simulink", level: 85 },
-        { name: "Structural Analysis", level: 75 }
       ]
     },
     {
@@ -258,6 +267,8 @@ description: "Developed predictive models to analyze and forecast ozone (O3) lev
 tags: ["Data Science", "Statistical Modeling", "Time Series", "Environmental Analysis"],
 type: "Data Science",
 imageUrl: "/project-icons/air-quality.png",
+github: "https://github.com/valeriasernasalazar/AirQualityAnalysis",
+resultsPdf: '/results/ReporteFinal-sima.pdf',
 isNew: true,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -280,11 +291,10 @@ detailedDescription: `
 `,
 techStack: [
   { name: "R Programming", level: 90 },
+    { name: "Python", level: 80 },
   { name: "Statistical Modeling", level: 85 },
   { name: "Time Series Analysis", level: 85 },
-  { name: "Python", level: 80 },
-  { name: "Prophet ML Library", level: 75 },
-  { name: "Web Dashboard Development", level: 70 }
+  { name: "Prophet", level: 75 },
 ]
 },
 {
@@ -295,6 +305,8 @@ description: "Developed a stochastic optimization algorithm that determines the 
 tags: ["Optimization", "Route Planning", "Simulation", "Vehicle Routing Problem", "Monte Carlo"],
 type: "Operations Research",
 imageUrl: "/project-icons/route-optimization.png",
+github: 'https://github.com/valeriasernasalazar/VRP-OptimizacionDeRutas',
+resultsPdf: '/results/vrp-resultados.pdf',
 isNew: true,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -321,7 +333,6 @@ techStack: [
   { name: "Operations Research", level: 85 },
   { name: "Geospatial Analysis", level: 80 },
   { name: "SimpleAI Library", level: 75 },
-  { name: "Data Visualization", level: 70 }
 ]
 },
 {
@@ -332,6 +343,7 @@ description: "Implemented and compared two neural network architectures (LeNet-5
 tags: ["Deep Learning", "Neural Networks", "Computer Vision", "Image Classification", "Siamese Network"],
 type: "Machine Learning",
 imageUrl: "/project-icons/fashion-classification.png",
+resultsPdf: '/results/redes-resultados.pdf',
 isNew: true,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -354,11 +366,10 @@ detailedDescription: `
 `,
 techStack: [
   { name: "Python", level: 95 },
-  { name: "TensorFlow/Keras", level: 90 },
-  { name: "Convolutional Neural Networks", level: 85 },
+  { name: "TensorFlow", level: 90 },
+  { name: "Keras", level: 90 },
+  { name: "CNN's", level: 85 },
   { name: "Siamese Networks", level: 85 },
-  { name: "Data Visualization", level: 80 },
-  { name: "Hyperparameter Tuning", level: 75 }
 ]
 },
 {
@@ -369,6 +380,7 @@ description: "Developed an optimization algorithm using the Capacitated Vehicle 
 tags: ["Operations Research", "Optimization", "CVRP", "Route Planning", "Tourism", "Mathematical Modeling"],
 type: "Operations Research",
 imageUrl: "/project-icons/mexico-tourism-optimization.png",
+resultsPdf: '/results/reto_optimizacion_final.pdf',  
 isNew: false,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -396,7 +408,6 @@ techStack: [
   { name: "CVRP Algorithm", level: 80 },
   { name: "Optimization Theory", level: 85 },
   { name: "Graph Theory", level: 75 },
-  { name: "Data Visualization", level: 70 }
 ]
 },
 {
@@ -407,6 +418,10 @@ description: "Conducted a comprehensive cybersecurity audit for Instituto Biling
 tags: ["Cybersecurity", "Network Security", "Vulnerability Assessment", "Risk Management", "CVSS Analysis", "SSL/TLS"],
 type: "Cybersecurity",
 imageUrl: "/project-icons/security-audit.png",
+resultsPdfs: [
+  { label: "Download Presentation", url: "/results/MA2002B_reporte.pdf" },
+  { label: "Download Report", url: "/results/RETO_MA2002B.pdf" }
+],
 isNew: false,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -444,7 +459,7 @@ date: "2023",
 description: "Designed and implemented intelligent navigation algorithms for Martian terrain exploration, comparing search methods including A*, Greedy, BFS, and simulated annealing to optimize path planning and crater descent for robotic explorers like the Perseverance Rover.",
 tags: ["Artificial Intelligence", "Path Planning", "Computer Vision", "Robotics", "Simulated Annealing", "A* Algorithm", "Mars Exploration"],
 type: "Artificial Intelligence",
-imageUrl: "/project-icons/mars-rover-exploration.png",
+imageUrl: "/project-icons/mars-rover.png",
 isNew: false,
 detailedDescription: `
   <h4>Project Overview</h4>
@@ -567,10 +582,30 @@ techStack: [
     let selectedProject = null;
     
     // Pagination variables
-    const projectsPerPage = 3;
+    let projectsPerPage = 3;
     let currentPage = 1;
     let displayedProjects = [];
     let totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+
+  function updateProjectsPerPage() {
+    if (window.innerWidth <= 640) {
+      projectsPerPage = 1;
+    } else if (window.innerWidth <= 900) {
+      projectsPerPage = 2;
+    } else {
+      projectsPerPage = 3;
+    }
+    updateDisplayedProjects();
+  }
+
+  // Update displayedProjects when projectsPerPage or filteredProjects changes
+  function updateDisplayedProjects() {
+    totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+    const startIndex = (currentPage - 1) * projectsPerPage;
+    const endIndex = startIndex + projectsPerPage;
+    displayedProjects = filteredProjects.slice(startIndex, endIndex);
+  }
+
   
     // Updated filter function to handle the new consolidated categories
     function filterProjects(filter) {
@@ -615,13 +650,6 @@ techStack: [
       updateDisplayedProjects();
     }
     
-    // Function to update the displayed projects based on pagination
-    function updateDisplayedProjects() {
-      totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-      const startIndex = (currentPage - 1) * projectsPerPage;
-      const endIndex = startIndex + projectsPerPage;
-      displayedProjects = filteredProjects.slice(startIndex, endIndex);
-    }
     
     // Functions for pagination navigation
     function nextPage() {
@@ -658,7 +686,8 @@ techStack: [
   
     // Animations and interactive elements
     onMount(() => {
-      // Handle escape key for modal
+      updateProjectsPerPage();
+      window.addEventListener('resize', updateProjectsPerPage);
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && selectedProject) {
           closeProjectModal();
@@ -685,14 +714,14 @@ techStack: [
   
       // Clean up on component destroy
       return () => {
-        window.removeEventListener('keydown', null);
+        window.removeEventListener('resize', updateProjectsPerPage);
       };
     });
   </script>
   
   <section id="projects">
     <p class="p1">A collection of my data science adventures and problem-solving journeys</p>
-    
+  
     <!-- Filter controls -->
     <div class="filter-controls">
       {#each filterOptions as option}
@@ -856,89 +885,109 @@ techStack: [
       </div>
     </div>
         
-<!-- Project details modal -->
-<!-- Project details modal -->
 {#if selectedProject}
-  <div class="project-modal active" on:click={(e) => {
-    if (e.target.classList.contains('project-modal')) closeProjectModal();
-  }}>
-    <div class="modal-content">
-      <button class="modal-close" on:click={closeProjectModal}>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      
-      <!-- Two Column Layout -->
-      <div class="modal-layout">
-        <!-- Left Column: Image & Meta -->
-        <div class="modal-sidebar">
-          <div class="sidebar-image">
-            <img 
-              src={selectedProject.imageUrl} 
-              alt={`${selectedProject.title}`} 
-              class="project-thumbnail"
-              on:error={(e) => e.target.src = '/project-icons/placeholder.png'}
-            />
-          </div>
+      <div class="project-modal active" on:click={(e) => {
+        if (e.target.classList.contains('project-modal')) closeProjectModal();
+      }}>
+        <div class="modal-content">
+          <button class="modal-close" on:click={closeProjectModal}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
           
-          <div class="sidebar-meta">
-            <div class="meta-item">
-              <span class="meta-label">Date</span>
-              <span class="meta-value">{selectedProject.date}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Category</span>
-              <span class="meta-value">{selectedProject.type}</span>
-            </div>
-          </div>
+          <!-- Two Column Layout -->
+          <div class="modal-layout">
+            <!-- Left Column: Image & Meta -->
+            <div class="modal-sidebar">
+              <div class="sidebar-image">
+                <img 
+                  src={selectedProject.imageUrl} 
+                  alt={`${selectedProject.title}`} 
+                  class="project-thumbnail"
+                  on:error={(e) => e.target.src = '/project-icons/placeholder.png'}
+                />
+              </div>
+              
+              <div class="sidebar-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Date</span>
+                  <span class="meta-value">{selectedProject.date}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Category</span>
+                  <span class="meta-value">{selectedProject.type}</span>
+                </div>
+              </div>
 
-          <div class="sidebar-tags">
-            <span class="tags-label">Technologies</span>
-            <div class="tags-list">
-              {#each selectedProject.tags as tag}
-                <span class="tech-tag">{tag}</span>
-              {/each}
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Content -->
-        <div class="modal-main">
-          <h1 class="project-title">{selectedProject.title}</h1>
-          
-          <div class="project-content">
-            {@html selectedProject.detailedDescription}
-          </div>
-          
-          <!-- Tech Stack -->
-          {#if selectedProject.techStack && selectedProject.techStack.length > 0}
-            <div class="skills-section">
-              <h3 class="skills-heading">Technical Proficiency</h3>
-              <div class="skills-list">
-                {#each selectedProject.techStack as tech}
-                  <div class="skill-item">
-                    <div class="skill-info">
-                      <span class="skill-name">{tech.name}</span>
-                      <span class="skill-percentage">{tech.level}%</span>
-                    </div>
-                    <div class="skill-bar-container">
-                      <div class="skill-bar-fill" style="width: {tech.level}%"></div>
-                    </div>
-                  </div>
-                {/each}
+              <div class="sidebar-github-actions">
+                {#if selectedProject.github}
+                  <a href={selectedProject.github} target="_blank" rel="noopener" class="github-link-minimal">
+                    <svg class="github-icon-minimal" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                      <path d="M12 0.297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    <span>GitHub</span>
+                  </a>
+                {/if}
+                {#if selectedProject.resultsPdfs}
+                  {#each selectedProject.resultsPdfs as pdf}
+                    <a href={pdf.url} download class="download-link-minimal" target="_blank" rel="noopener">
+                      <svg class="download-icon-minimal" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                        <path d="M13 10V3H7v7H4l6 7 6-7h-3zm-9 7v2h14v-2H4z"/>
+                      </svg>
+                      <span>{pdf.label}</span>
+                    </a>
+                  {/each}
+                {:else if selectedProject.resultsPdf}
+                  <a href={selectedProject.resultsPdf} download class="download-link-minimal" target="_blank" rel="noopener">
+                    <svg class="download-icon-minimal" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                      <path d="M13 10V3H7v7H4l6 7 6-7h-3zm-9 7v2h14v-2H4z"/>
+                    </svg>
+                    <span>Download Results</span>
+                  </a>
+                {/if}
+              </div>
+              
+              <div class="sidebar-techstack">
+                <span class="tags-label">Tech Stack</span>
+                <div class="tech-chips-list">
+                  {#each selectedProject.techStack as tech}
+                    <span class="tech-chip">
+                      <img
+                        src={`/tech-logos/${tech.name.toLowerCase().replace(/[\s\/]/g, '-')}.png`}
+                        alt={tech.name}
+                        class="tech-logo"
+                        on:error={(e) => e.target.style.display = 'none'}
+                      />
+                      {tech.name}
+                    </span>
+                  {/each}
+                </div>
               </div>
             </div>
-          {/if}
+            
+            <!-- Right Column: Main Content -->
+            <div class="modal-main">
+              <h1 class="project-title">{selectedProject.title}</h1>
+              <div class="project-content">
+                {@html selectedProject.detailedDescription}
+              </div>
+              {#if selectedProject.impactBadges}
+                <div class="impact-badges-list">
+                  {#each selectedProject.impactBadges as badge}
+                    <span class="impact-badge">{badge}</span>
+                  {/each}
+                </div>
+              {/if}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-{/if}
+    {/if}
   </section>
 
-  <style>
-  /* Projects Styles */
+<style>
+
   #projects {
     background: rgba(27, 38, 59, 0.95);
     padding: 4rem 2rem;
@@ -1213,6 +1262,7 @@ techStack: [
   padding: 0;
   overflow-y: auto;
   overflow-x: auto;
+  zoom: 1.1765;
 }
 
 .project-modal.active {
@@ -1587,22 +1637,68 @@ techStack: [
 }
 
 @media (max-width: 640px) {
-  .modal-main {
-    padding: 2rem 1.5rem;
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 0;
+    margin-top: 1.5rem;
   }
-  
-  .modal-sidebar {
-    padding: 1.5rem 1rem;
+  .project-card {
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 0.5rem 0.2rem;
   }
-  
-  .project-title {
-    font-size: 1.75rem;
+  .project-header,
+  .project-content,
+  .project-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .project-visualization {
+    height: 120px;
+    margin-bottom: 1rem;
+  }
+  .project-image {
+    max-height: 90px;
   }
 }
 
-.project-title,
-.projects-grid .project-title {
-  color: #C05746; /* Pink */
+/* Modal: stack columns vertically on mobile */
+@media (max-width: 640px) {
+  .modal-layout {
+    grid-template-columns: 1fr;
+  }
+  .modal-sidebar,
+  .modal-main {
+    padding: 1rem 0.5rem;
+  }
+  .sidebar-image {
+    min-height: 100px;
+    max-width: 180px;
+    margin-bottom: 1rem;
+  }
+  .project-title,
+  .modal-main .project-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Make tags and buttons wrap and fit better on mobile */
+@media (max-width: 640px) {
+  .tags {
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .tags span {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+  .project-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 .project-content h4 {
@@ -1807,4 +1903,144 @@ techStack: [
   opacity: 0.18;
   border-radius: 2px;
   margin-top: 0.4rem;
-}</style>
+}
+
+/* Tech Chips */
+.tech-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.tech-chip {
+  background: rgba(192,87,70,0.12);
+  color: #C05746;
+  border-radius: 6px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.2rem;
+  border: 1px solid rgba(192,87,70,0.18);
+  transition: background 0.2s;
+}
+.tech-chip:hover {
+  background: #C05746;
+  color: #fff;
+}
+
+/* Impact/Contribution Badges */
+.impact-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.impact-badge {
+  background: #C05746;
+  color: #fff;
+  border-radius: 14px;
+  padding: 0.3em 1em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.tech-chip {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.tech-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.3em;
+  vertical-align: middle;
+  background: transparent;
+  border-radius: 4px;
+  object-fit: contain;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.github-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 0.3em;
+  filter: brightness(1.2);
+}
+.sidebar-github {
+  margin: 1.2rem 0 1.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #C05746;
+  background: rgba(192,87,70,0.10);
+  border-radius: 24px;
+  padding: 0.5em 1.1em 0.5em 0.7em;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.github-link:hover {
+  background: #C05746;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(192,87,70,0.12);
+}
+
+.github-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 0.5em;
+  filter: none;
+  transition: filter 0.2s;
+}
+
+.github-link:hover .github-icon {
+  filter: brightness(10);
+}
+/* Minimal GitHub and Download links at bottom left */
+.sidebar-github-actions {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;    /* Add space above the links */
+}
+
+.github-link-minimal,
+.download-link-minimal {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+  gap: 0.4em;
+  font-weight: 500;
+}
+
+.github-link-minimal:hover,
+.download-link-minimal:hover {
+  opacity: 1;
+  color: #C05746;
+}
+
+.github-icon-minimal,
+.download-icon-minimal {
+  margin-right: 0.3em;
+  display: inline-block;
+}
+.sidebar-techstack {
+  margin-bottom: 4rem; 
+}
+</style>

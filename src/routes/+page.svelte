@@ -196,6 +196,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    font-size: 85%;
     background: rgba(27, 38, 59, 0.95);
     color: #EAEAEA;
     scroll-behavior: smooth;
@@ -216,17 +217,26 @@
   scroll-behavior: smooth;
 }
 
-.container {
-  padding-top: 70px;
+body {
+  width: 100vw;
   height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: mandatoru;
-  scroll-padding-top: 100px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  padding-top: 82.4px; /* 70 / 0.85 */
+  width: 117.6vw;  /* 100 / 0.85 */
+  height: 117.6vh;
+  overflow: auto;
+  scroll-snap-type: none;
+  scroll-padding-top: 0;
+  zoom: 0.85;
 }
 
 .container section {
-  scroll-snap-align: start;
-  min-height: 100vh;
+  min-height: 117.6vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,7 +244,6 @@
   background: #1b263b;
   color: #eaeaea;
 }
-
 /* Nav Styling */
 nav {
   display: flex;
@@ -475,7 +484,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 117.6vh;
     padding: 20px;
     background: rgba(27, 38, 59, 0.95);
 }
@@ -590,7 +599,7 @@ section {
 }
 
 #about p {
-    font-size: 1rem;
+    font-size: 1.6rem;
     line-height: 1.6;
     margin-bottom: 15px;
     color: #EAEAEA;
@@ -599,7 +608,7 @@ section {
 
 @media (min-width: 768px) {
   #about p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.8;
     margin-bottom: 20px;
     text-align: justify;
@@ -822,7 +831,7 @@ button:hover {
         Besides from the technical side of things, I love collaborationg with interdisciplinary teams in order to solve problems and deliver data-driven solutions that have a real impact. I have actually found that this is the most rewarding part of my work as a data engineer, as I get to learn from others while also sharing my own knowledge and expertise.
       </p>
       <p class="p11">
-        In a more personal note, I really like reading (don't worry, you can find my most recent thoughts and reviews <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#books')}>here</a>!), and drinking a good cup of coffee, hobby that I have recently adopted and have found to be one of the very best parts of my day. If you want to know more about it I have not given it, yet, a dedicated part of my page so, for now, feel free to <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#contact')}>contact me</a> and ask away because I love to talk about it!
+        In a more personal note, I really like reading (don't worry, you can find my most recent thoughts and reviews <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#books')}>here</a>!), and drinking a good cup of coffee, hobby that I have recently adopted and have found to be one of the very best parts of my day. I have not given it, yet, a dedicated part of my page so, for now, feel free to <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#contact')}>contact me</a> and ask away because I love to talk about it!
       </p>
       <div class="cta-buttons">
         <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Get a look at my projects!</a>

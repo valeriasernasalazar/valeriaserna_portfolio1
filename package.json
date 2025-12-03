@@ -28,6 +28,7 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "chart.js": "^4.4.7"
+    "chart.js": "^4.4.7",
+    "tech-stack-icons": "^3.3.2"
   }
 }
