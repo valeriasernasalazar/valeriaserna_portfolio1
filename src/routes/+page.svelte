@@ -808,7 +808,7 @@ button:hover {
 
 <div class="container">
   <section id="home">
-    <h1>Valeria María Serna Salazar</h1>
+    <h1>Hi, I'm Valeria Serna</h1>
     <p>Data Engineer | Expert at turning coffee ☕ and code 💻 into scalable systems for data-driven impact.</p>
     <div class="cta-buttons">
       <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>View My Projects</a>
