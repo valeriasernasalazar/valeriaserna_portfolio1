@@ -757,7 +757,7 @@ button:hover {
 <nav>
   <div class="profile-container">
     <div class="profile">
-      <img src="{base}/profilepic2.png" alt="Profile" />
+      <img src="{base}/profile-valeriamariasernasalazar.png" alt="Valeria María Serna Salazar" />
       <div class="eye" id="leftEye">
         <div class="eye-ball" id="leftEyeBall"></div>
       </div>
@@ -808,8 +808,8 @@ button:hover {
 
 <div class="container">
   <section id="home">
-    <h1>Hello, I'm Valeria Serna</h1>
-    <p>Expert at turning coffee ☕ and code 💻 into scalable systems for data-driven impact.</p>
+    <h1>Valeria María Serna Salazar</h1>
+    <p>Data Engineer | Expert at turning coffee ☕ and code 💻 into scalable systems for data-driven impact.</p>
     <div class="cta-buttons">
       <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>View My Projects</a>
       <a href="/#contact" on:click={(e) => handleNavClick(e, '/#contact')}>Contact Me</a>
@@ -818,17 +818,17 @@ button:hover {
 
   <section id="about">
     <div class="text">
-      <h1>About Me</h1>
+      <h1>Valeria María Serna Salazar</h1>
       <p class="p11">
 
         Hello, I'm Valeria Serna, a data engineer that enjoys finding structure in chaos. I'm particularly passionate about building data pipelines and systems that make data reliable, accesible, and useful for gathering meaningful insights. I currently use Python, SQL, and cloud platforms like AWS to create efficient data workflows.
 
       </p>
       <p class="p11">
-        My B.S. in Data Science and Applied Mathematics gave me a strong background in statistics, data analysis, AI, cybsersecurity, ML, and mathematical optimization, which allows me to approach everyday tasks and possible challenges that could arise with a unique perspective and skill set.
+        My B.S. in Data Science and Applied Mathematics from Tecnológico de Monterrey gave me a strong background in statistics, data analysis, AI, cybersecurity, ML, and mathematical optimization, which allows me to approach everyday tasks and possible challenges that could arise with a unique perspective and skill set.
       </p>
       <p class="p11">
-        Besides from the technical side of things, I love collaborationg with interdisciplinary teams in order to solve problems and deliver data-driven solutions that have a real impact. I have actually found that this is the most rewarding part of my work as a data engineer, as I get to learn from others while also sharing my own knowledge and expertise.
+        Besides the technical side of things, I love collaborating with interdisciplinary teams to solve problems and deliver data-driven solutions that have real impact. My experience at Enviaflores.com has taught me how to build scalable data systems in fast-paced environments while maintaining high standards of data quality and reliability.
       </p>
       <p class="p11">
         In a more personal note, I really like reading (don't worry, you can find my most recent thoughts and reviews <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#books')}>here</a>!), and drinking a good cup of coffee, hobby that I have recently adopted and have found to be one of the very best parts of my day. I have not given it, yet, a dedicated part of my page so, for now, feel free to <a href="#contact" class="inline-link" on:click={(e) => handleNavClick(e, '#contact')}>contact me</a> and ask away because I love to talk about it!
@@ -837,8 +837,8 @@ button:hover {
         <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>Get a look at my projects!</a>
       </div>
     </div>
-    
-    <img src="{base}/foto2.png" alt="Valeria Serna" />
+
+    <img src="{base}/valeriamariasernasalazar.png" alt="Picture of Valeria María Serna Salazar" />
   </section>
     
   <section id="projects">
