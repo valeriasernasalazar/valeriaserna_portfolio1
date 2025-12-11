@@ -523,13 +523,53 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .cta-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.2rem;
+    width: 100%;
+  }
+  .cta-buttons .document-actions {
+    flex-direction: row;
+    gap: 1.2rem;
+    width: auto;
+  }
+}
+
+.primary-actions {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-  .cta-buttons {
+  .primary-actions {
     flex-direction: row;
-    gap: 0;
+    gap: 1rem;
+    justify-content: center;
+  }
+}
+
+.document-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .document-actions {
+    flex-direction: row;
+    gap: 1.2rem;
+    width: auto;
   }
 }
 
@@ -537,29 +577,84 @@ section {
   background: #C05746;
   color: white;
   text-decoration: none;
-  padding: 0.8rem 1.5rem;
+  padding: 0.9rem 1.8rem;
   border-radius: 30px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: bold;
   transition: all 0.3s ease;
   text-align: center;
-  width: 200px;
+  width: 100%;
+  max-width: 280px;
 }
 
 @media (min-width: 768px) {
   .cta-buttons a {
     padding: 1rem 2rem;
-    margin: 0.5rem;
     width: auto;
+    min-width: 200px;
   }
 }
 
 .cta-buttons a:hover {
   background: #AD6A6C;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(192, 87, 70, 0.4);
 }
 
-/* About Section */
+.cta-buttons .secondary-btn {
+  background: rgba(27, 38, 59, 0.95);;
+  border: 2px solid #cd6c5d;
+  font-size: 1.35rem;
+  padding: 1.6rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.1rem;
+  color: #C05746;
+  border-radius: 22px;
+  box-shadow: 0 2px 18px rgba(192, 87, 70, 0.13);
+  font-weight: 600;
+  transition: 
+    background 0.3s,
+    border-color 0.3s,
+    color 0.3s,
+    box-shadow 0.3s,
+    transform 0.2s;
+  position: relative;
+  min-width: 260px;
+  max-width: 350px;
+  margin: 0.7rem 0;
+  height: 4.6rem;
+  cursor: pointer;
+}
+
+.cta-buttons .secondary-btn:hover {
+  background: #C05746;
+  color: #fff;
+  border-color: #AD6A6C;
+  box-shadow: 0 4px 22px rgba(192, 87, 70, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.cta-buttons .secondary-btn .doc-icon {
+  font-size: 2.3rem;
+  margin-right: 0.85rem;
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.doc-icon {
+  font-size: 1.1rem;
+}
+
+
 #about {
     display: flex;
     flex-direction: column;
@@ -810,15 +905,40 @@ button:hover {
   <section id="home">
     <h1>Hi, I'm Valeria Serna</h1>
     <p>Data Engineer | Expert at turning coffee ☕ and code 💻 into scalable systems for data-driven impact.</p>
-    <div class="cta-buttons">
-      <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')}>View My Projects</a>
-      <a href="/#contact" on:click={(e) => handleNavClick(e, '/#contact')}>Contact Me</a>
+  <div class="cta-buttons">
+    <div class="document-actions">
+      <a href="{base}/cv-valeria-serna.pdf" target="_blank" rel="noopener noreferrer" class="secondary-btn">
+        <span class="doc-icon">📄</span>
+        <span>
+          <strong>View my CV</strong>
+          <br />
+          <small style="font-weight:400; color:#ADB6C4; margin-left:-10px">PDF, English</small>
+        </span>
+      </a>
+      <a href="{base}/paper-valeria-serna.pdf" target="_blank" rel="noopener noreferrer" class="secondary-btn">
+        <span class="doc-icon">📑</span>
+        <span>
+          <strong style="margin-left:-10px">Read a paper I co-authored</strong>
+          <br />
+          <small style="font-weight:400; color:#ADB6C4;margin-left:-100px">Springer Nature 2025</small>
+        </span>
+      </a>
     </div>
+    <div class="document-actions">
+      <a href="/#projects" on:click={(e) => handleNavClick(e, '/#projects')} class="secondary-btn">
+        <span class="doc-icon">📊</span>
+        <span>
+          <strong>View My Projects</strong>
+          <br />
+          <small style="font-weight:400; color:#ADB6C4;margin-left:-55px">Data & Code</small>
+        </span>
+        </div>
   </section>
 
+  
   <section id="about">
     <div class="text">
-      <h1>Valeria María Serna Salazar</h1>
+      <h1>About Me</h1>
       <p class="p11">
 
         Hello, I'm Valeria Serna, a data engineer that enjoys finding structure in chaos. I'm particularly passionate about building data pipelines and systems that make data reliable, accesible, and useful for gathering meaningful insights. I currently use Python, SQL, and cloud platforms like AWS to create efficient data workflows.
