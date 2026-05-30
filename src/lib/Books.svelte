@@ -331,9 +331,7 @@
     });
   </script>
   
-  <section id="books">
-    <p class="p1">Books that have influenced my thinking and expanded my horizons</p>
-    
+  <section id="books">    
     <!-- View toggle -->
     <div class="view-toggle">
       <button class={!showAnalysis ? 'active' : ''} on:click={() => showAnalysis = false}>
