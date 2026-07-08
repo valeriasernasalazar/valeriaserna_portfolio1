@@ -1062,9 +1062,9 @@
           <span class="chip">Python</span>
           <span class="chip">SQL</span>
           <span class="chip">AWS</span>
-          <span class="chip">PostgreSQL</span>
           <span class="chip">pandas</span>
-          <span class="chip">Selenium</span>
+          <span class="chip">polars</span>
+          <span class="chip">Airflow</span>
           <span class="chip">Git</span>
         </div>
       </aside>
