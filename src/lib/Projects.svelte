@@ -352,6 +352,7 @@
     if (e.target === e.currentTarget) closeProject();
   }
 
+
   onMount(() => {
     const onKey = (e) => {
       if (e.key === "Escape" && selectedProject) closeProject();
@@ -441,41 +442,10 @@
     </div>
   {/if}
 
-  <div class="skills-section">
-    <h3 class="skills-title">Skills across projects</h3>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <h4>Machine Learning</h4>
-        <ul class="skill-list">
-          <li><span>Computer Vision</span><div class="skill-bar"><div class="skill-fill" style="width: 88%"></div></div></li>
-          <li><span>Neural Networks</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></li>
-          <li><span>Time Series</span><div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div></li>
-          <li><span>Path Planning</span><div class="skill-bar"><div class="skill-fill" style="width: 82%"></div></div></li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h4>Data & Visualization</h4>
-        <ul class="skill-list">
-          <li><span>Tableau</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></li>
-          <li><span>Power BI</span><div class="skill-bar"><div class="skill-fill" style="width: 82%"></div></div></li>
-          <li><span>Matplotlib</span><div class="skill-bar"><div class="skill-fill" style="width: 88%"></div></div></li>
-          <li><span>Streamlit</span><div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div></li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h4>Engineering</h4>
-        <ul class="skill-list">
-          <li><span>Operations Research</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></li>
-          <li><span>Security Auditing</span><div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div></li>
-          <li><span>Control Systems</span><div class="skill-bar"><div class="skill-fill" style="width: 78%"></div></div></li>
-          <li><span>Signal Processing</span><div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
-{#if selectedProject}
+  </div>
+
+  {#if selectedProject}
   <div
     class="modal-overlay"
     on:click={handleOverlayClick}
@@ -795,80 +765,6 @@
     transform: translateY(2px);
   }
 
-  /* ── Skills section ── */
-  .skills-section {
-    max-width: 1100px;
-    margin: 4rem auto 0;
-    width: 100%;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .skills-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #EAEAEA;
-    margin: 0 0 1.8rem 0;
-    text-align: center;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .skills-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-    }
-  }
-
-  .skill-category h4 {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #C05746;
-    margin: 0 0 1rem 0;
-  }
-
-  .skill-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .skill-list li {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    margin-bottom: 0.9rem;
-  }
-
-  .skill-list li:last-child {
-    margin-bottom: 0;
-  }
-
-  .skill-list span {
-    font-size: 0.82rem;
-    color: #C9D1DC;
-  }
-
-  .skill-bar {
-    height: 3px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .skill-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #C05746 0%, #D88B7A 100%);
-    border-radius: 2px;
-    transition: width 0.8s ease;
-  }
 
   /* ── Modal ── */
   .modal-overlay {

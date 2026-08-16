@@ -39,7 +39,7 @@
         id: 19189061,
         title: "When Things Fall Apart",
         author: "Pema Chodron",
-        rating: 3,
+        rating: 2.6,
         coverImg: `${base}/book-covers/cuando-todo.jpg`,
         yearPublished: 2011,
         category: "Philosophy",
@@ -49,7 +49,7 @@
         id: 41104077,
         title: "Invisible Women",
         author: "Caroline Criado Perez",
-        rating: 4,
+        rating: 2.4,
         coverImg: `${base}/book-covers/invisible-women.jpg`,
         yearPublished: 2019,
         category: "Data Science",
@@ -89,7 +89,7 @@
         id: 53239311,
         title: "The Happiest Man on Earth",
         author: "Eddie Jaku",
-        rating: 4,
+        rating: 2.5,
         coverImg: `${base}/book-covers/happiest-man.jpg`,
         yearPublished: 2020,
         category: "Memoir",
@@ -159,7 +159,7 @@
         id: 54814676,
         title: "Crying in H Mart",
         author: "Michelle Zauner",
-        rating: 3,
+        rating: 2.8,
         coverImg: `${base}/book-covers/h-mart.jpg`,
         yearPublished: 2021,
         category: "Memoir",
@@ -169,7 +169,7 @@
         id: 7074248,
         title: "El arte de ser feliz",
         author: "Arthur Schopenhauer",
-        rating: 3,
+        rating: 2,
         coverImg: `${base}/book-covers/arte-feliz.jpg`,
         yearPublished: 2000,
         category: "Philosophy",
@@ -239,8 +239,8 @@
         id: 900001,
         title: "El tunel",
         author: "Ernesto Sabato",
-        rating: 4,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        rating: 5,
+        coverImg: `${base}/book-covers/el-tunel.jpg`,
         yearPublished: 1948,
         category: "Fiction",
         thoughts: ""
@@ -250,7 +250,7 @@
         title: "Carta de una desconocida",
         author: "Stefan Zweig",
         rating: 4,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        coverImg: `${base}/book-covers/carta-de-una-desconocida.jpg`,
         yearPublished: 1922,
         category: "Fiction",
         thoughts: ""
@@ -260,7 +260,7 @@
         title: "La vegetariana",
         author: "Han Kang",
         rating: 4,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        coverImg: `${base}/book-covers/the-vegetarian.jpg`,
         yearPublished: 2007,
         category: "Fiction",
         thoughts: ""
@@ -270,7 +270,7 @@
         title: "El verano invencible de Liliana",
         author: "Cristina Rivera Garza",
         rating: 4,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        coverImg: `${base}/book-covers/verano-invencible-de-liliana.jpg`,
         yearPublished: 2022,
         category: "Memoir",
         thoughts: ""
@@ -279,8 +279,8 @@
         id: 900005,
         title: "Fluyan mis lagrimas dijo el policia",
         author: "Philip K. Dick",
-        rating: 3,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        rating: 2.7,
+        coverImg: `${base}/book-covers/flow-my-tears.jpg`,
         yearPublished: 1974,
         category: "Fiction",
         thoughts: ""
@@ -290,7 +290,7 @@
         title: "La tregua",
         author: "Mario Benedetti",
         rating: 4,
-        coverImg: `${base}/book-covers/placeholder.jpg`,
+        coverImg: `${base}/book-covers/la-tregua.jpg`,
         yearPublished: 1960,
         category: "Fiction",
         thoughts: ""
@@ -356,6 +356,12 @@
     $: hasMore = filteredBooks.length > INITIAL_SHOW && !showAll;
 
     $: topPicks = books.filter(b => b.rating === 5);
+
+  function topPickExcerpt(thoughts) {
+    if (!thoughts || !thoughts.trim()) return '';
+    if (thoughts.length <= 95) return thoughts;
+    return thoughts.slice(0, 95).trim().replace(/\s+/g, ' ') + '...';
+  }
 
     $: stats = {
       total: books.length,
@@ -663,26 +669,36 @@
         </div>
       {/if}
 
-      <!-- Top Picks -->
-      <div class="top-picks">
-        <div class="top-picks-header">
-          <h3>Top Picks</h3>
-          <span class="top-picks-badge">{topPicks.length} books</span>
+      <!-- Top 3 Picks -->
+      <div class="top-picks-podium">
+        <div class="podium-header">
+          <h3>Top 3</h3>
+          <span class="podium-subtitle">Books that shaped my thinking</span>
         </div>
-        <div class="top-picks-scroll">
-          {#each topPicks as book (book.id)}
-            <button class="top-pick-card" on:click={() => openModal(book)}>
-              <img
-                src={book.coverImg}
-                alt={book.title}
-                loading="lazy"
-                on:error={(e) => e.target.src = `${base}/book-covers/placeholder.jpg`}
-              />
-              <div class="top-pick-info">
-                <span class="top-pick-title">{book.title}</span>
-                <span class="top-pick-author">{book.author}</span>
+        <div class="podium-stage">
+          {#each topPicks as book, i (book.id)}
+            {@const rank = i + 1}
+            <button
+              class="podium-slot {rank === 1 ? 'podium-first' : ''}"
+              on:click={() => openModal(book)}
+              aria-label="View details for {book.title}"
+            >
+              <span class="podium-rank" aria-hidden="true">0{rank}</span>
+              <div class="podium-cover-wrap">
+                <img
+                  src={book.coverImg}
+                  alt="{book.title} by {book.author}"
+                  loading="lazy"
+                  on:error={(e) => e.target.src = `${base}/book-covers/placeholder.jpg`}
+                />
               </div>
-              <span class="top-pick-stars">{renderStars(book.rating)}</span>
+              <div class="podium-info">
+                <span class="podium-title">{book.title}</span>
+                <span class="podium-author">{book.author}</span>
+                {#if book.thoughts && book.thoughts.trim()}
+                  <span class="podium-excerpt">{topPickExcerpt(book.thoughts)}</span>
+                {/if}
+              </div>
             </button>
           {/each}
         </div>
@@ -1196,109 +1212,223 @@
     font-size: 0.92rem;
   }
 
-  /* ── Top Picks ───────────────────────────────────────────── */
-  .top-picks {
+  /* ── Top 3 Podium ─────────────────────────────────────── */
+  .top-picks-podium {
     border-top: 1px solid rgba(192, 87, 70, 0.1);
-    padding-top: 2rem;
+    padding-top: 2.5rem;
+    margin-top: 0.5rem;
   }
 
-  .top-picks-header {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    margin-bottom: 1.2rem;
+  .podium-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
   }
 
-  .top-picks-header h3 {
+  .podium-header h3 {
     font-size: 1.15rem;
     font-weight: 700;
     color: #C05746;
-    margin: 0;
+    margin: 0 0 0.4rem 0;
+    letter-spacing: 0.04em;
   }
 
-  .top-picks-badge {
-    font-size: 0.72rem;
-    font-weight: 600;
+  .podium-subtitle {
+    font-size: 0.78rem;
     color: #6E7891;
-    background: rgba(13, 27, 42, 0.5);
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
+    font-style: italic;
   }
 
-  .top-picks-scroll {
+  .podium-stage {
     display: flex;
-    gap: 0.8rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(192, 87, 70, 0.3) transparent;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .top-picks-scroll::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .top-picks-scroll::-webkit-scrollbar-thumb {
-    background: rgba(192, 87, 70, 0.3);
-    border-radius: 10px;
-  }
-
-  .top-pick-card {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    background: rgba(13, 27, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 0.5rem 0.9rem 0.5rem 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    color: inherit;
-    font-family: inherit;
-  }
-
-  .top-pick-card:hover {
-    background: rgba(192, 87, 70, 0.1);
-    border-color: rgba(192, 87, 70, 0.3);
-    transform: translateY(-2px);
-  }
-
-  .top-pick-card img {
-    width: 36px;
-    height: 54px;
-    border-radius: 4px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  .top-pick-info {
+  .podium-slot {
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 2.5rem 1.2rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-align: center;
+    color: inherit;
+    font-family: inherit;
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .podium-slot:hover {
+    background: rgba(13, 27, 42, 0.5);
+    border-color: rgba(192, 87, 70, 0.2);
+    transform: translateY(-10px);
+  }
+
+  .podium-slot:focus-visible {
+    outline: 2px solid #C05746;
+    outline-offset: 2px;
+  }
+
+  .podium-slot.podium-first {
+    border-color: rgba(192, 87, 70, 0.2);
+    box-shadow: 0 8px 40px rgba(192, 87, 70, 0.08);
+    padding-top: 3rem;
+    padding-bottom: 1.8rem;
+    max-width: 220px;
+  }
+
+  .podium-slot.podium-first:hover {
+    border-color: rgba(192, 87, 70, 0.4);
+    box-shadow: 0 14px 50px rgba(192, 87, 70, 0.15);
+  }
+
+  .podium-rank {
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(192, 87, 70, 0.35);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.35s ease;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .podium-slot.podium-first .podium-rank {
+    font-size: 7.5rem;
+    color: rgba(192, 87, 70, 0.40);
+  }
+
+  .podium-slot:hover .podium-rank {
+    color: rgba(192, 87, 70, 0.50);
+  }
+
+  .podium-slot.podium-first:hover .podium-rank {
+    color: rgba(192, 87, 70, 0.58);
+  }
+
+  .podium-cover-wrap {
+    position: relative;
+    z-index: 1;
+    width: 110px;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-shrink: 0;
+  }
+
+  .podium-slot.podium-first .podium-cover-wrap {
+    width: 130px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .podium-slot:hover .podium-cover-wrap {
+    transform: scale(1.04);
+  }
+
+  .podium-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .podium-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    position: relative;
+    z-index: 1;
     min-width: 0;
   }
 
-  .top-pick-title {
-    font-size: 0.8rem;
-    font-weight: 600;
+  .podium-title {
+    font-size: 0.82rem;
+    font-weight: 700;
     color: #EAEAEA;
-    white-space: nowrap;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
   }
 
-  .top-pick-author {
+  .podium-slot.podium-first .podium-title {
+    font-size: 0.88rem;
+  }
+
+  .podium-author {
     font-size: 0.72rem;
     color: #ADB6C4;
     font-style: italic;
   }
 
-  .top-pick-stars {
-    color: #FFD700;
-    font-size: 0.72rem;
-    flex-shrink: 0;
+  .podium-excerpt {
+    font-size: 0.7rem;
+    color: #6E7891;
+    line-height: 1.5;
+    margin-top: 0.3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 580px) {
+    .podium-stage {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      max-width: 360px;
+    }
+
+    .podium-slot,
+    .podium-slot.podium-first {
+      flex-direction: row;
+      text-align: left;
+      padding: 2rem 1rem 1rem;
+      max-width: none;
+      gap: 1rem;
+    }
+
+    .podium-rank {
+      font-size: 4.5rem;
+      top: 0.3rem;
+      left: 0.8rem;
+      transform: none;
+    }
+
+    .podium-slot.podium-first .podium-rank {
+      font-size: 5rem;
+    }
+
+    .podium-cover-wrap,
+    .podium-slot.podium-first .podium-cover-wrap {
+      width: 70px;
+      flex-shrink: 0;
+    }
+
+    .podium-info {
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .podium-excerpt {
+      -webkit-line-clamp: 2;
+    }
   }
 
   /* ═════════════════════════════════════════════════════════════
@@ -1745,8 +1875,6 @@
       font-size: 1.3rem;
     }
 
-    .top-pick-title {
-      max-width: 120px;
-    }
+
   }
 </style>
